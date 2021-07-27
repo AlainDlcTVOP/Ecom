@@ -3,13 +3,22 @@ const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcryptjs');
 
-router.get(`/`, async (req, res) =>{
-    const userList = await User.find();
+router.get(`/`, async (req, res) =>{    // dont show -passwordHash
+    const userList = await User.find().select('-passwordHash');// select API ex name phone email
 
     if(!userList) {
         res.status(500).json({success: false})
     } 
     res.send(userList);
+})
+
+
+router.get('/:id', async (req, res) => {
+    const user = await User.findById(req.params.id).select('-passwordHash');// select API ex name phone email
+     if (!user) 
+        return res.status(500).send({message : 'The user with the given ID was not found'})
+    
+     res.status(200).send(user);
 })
 
 
