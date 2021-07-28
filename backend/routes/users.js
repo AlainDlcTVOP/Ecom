@@ -76,6 +76,8 @@ router.post('/login', async (req,res) => {
         const token = jwt.sign(
             {
                 userId: user.id,
+                // check if Admin secure
+                isAdmin: user.isAdmin,
               
             },
             secret,
