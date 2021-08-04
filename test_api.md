@@ -1,5 +1,8 @@
-- How orders table is connected (link)
-  How to see how we send data to frontend with postman
+
+* press RAW
+* How orders table is connected (link)
+ How to see how we send data to frontend with postman
+
 
 jsonformat
 Orders Examlpe:
