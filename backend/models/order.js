@@ -1,42 +1,42 @@
+
 const mongoose = require('mongoose');
 
 const orderSchema = mongoose.Schema({
-    orderItems: [{ // link  OrderItem between and Order Array of [] database
+    orderItems: [{
         type: mongoose.Schema.Types.ObjectId,
-        reg: 'OrderItem',
-        require: true,
+        ref: 'OrderItem',
+        required:true
     }],
-    shippingAdress1: {
+    shippingAddress1: {
         type: String,
-        require: true,
+        required: true,
     },
-      shippingAdress2: {
+    shippingAddress2: {
         type: String,
     },
     city: {
         type: String,
-        require:true,
+        required: true,
     },
     zip: {
         type: String,
-        require: true,
+        required: true,
     },
     country: {
         type: String,
-        require: true,
+        required: true,
     },
     phone: {
-        type: Number,
-        require: true,
+        type: String,
+        required: true,
     },
     status: {
         type: String,
-        require: true,
-        default : 'Pending',
+        required: true,
+        default: 'Pending',
     },
     totalPrice: {
         type: Number,
-   
     },
     user: {
         type: mongoose.Schema.Types.ObjectId,
@@ -47,6 +47,7 @@ const orderSchema = mongoose.Schema({
         default: Date.now,
     },
 })
+
 orderSchema.virtual('id').get(function () {
     return this._id.toHexString();
 });
@@ -55,5 +56,6 @@ orderSchema.set('toJSON', {
     virtuals: true,
 });
 
-
 exports.Order = mongoose.model('Order', orderSchema);
+
+
