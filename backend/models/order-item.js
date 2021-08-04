@@ -3,12 +3,12 @@ const mongoose = require('mongoose');
 const orderItemSchema = mongoose.Schema({
     quantity: {
         type: Number,
-        require: true,
+        required: true
     },
-    product: { // orderItem ref to Product
+    product: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Product'
     }
 })
 
-exports.orderItem = mongoose.model('OrderItem', orderItemSchema);
+exports.OrderItem = mongoose.model('OrderItem', orderItemSchema);
