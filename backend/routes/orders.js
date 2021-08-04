@@ -52,7 +52,7 @@ router.post('/', async (req,res)=>{
         country: req.body.country,
         phone: req.body.phone,
         status: req.body.status,
-        //totalPrice: totalPrice,
+        totalPrice: totalPrice,
         user: req.body.user,
     })
     console.log(order);
@@ -94,6 +94,35 @@ router.get(`/get/userorders/:userid`, async (req, res) =>{
     res.send(userOrderList);
 })
 
+router.put('/:id', async (req, res) => {
+    const order = await Order.findByIdAndUpdate(
+        req.params.id,
+        {
+             status: req.body.status
+        },
+        {new: true}
+    )
+     if (!order) 
+        return res.status(404).send('the order cannot be created!')
+    
+    res.send(order);
+})
+
+Order.findByIdAndDelete
+router.delete('/:id', (req, res) => {
+    Order.findByIdAndRemove(req.params.id).then(async order =>{
+        if (order) {
+            await order.orderItems.map(async orderItem => {
+                await OrderItem.findByIdAndRemove(orderItem);
+            })
+            return res.status(200).json({success:true, message: 'the order is deleted!'})
+        } else {
+              return res.status(404).json({success:false, message: 'the order not found!'})
+        }
+    }).catch(err => {
+        return res.status(404).json({success:false, error: err})
+    })
+})
 
 
 module.exports =router;
