@@ -39,8 +39,16 @@ router.post('/', async (req,res)=>{
         return newOrderItem._id;
     }))
     const orderItemsIdsResolved =  await orderItemsIds;
-
-    console.log(orderItemsIdsResolved);
+    // calcualte price
+    const totalPrices = await Promise.all(orderItemsIdsResolved.map(async (orderItemsId)=>{
+        const orderItem = await OrderItem.findById(orderItemsId).populate('product','price');
+        const totalPrice = orderItem.product.price * orderItem.quantity;
+        return totalPrice;
+    }))
+    
+    const totalPrice = totalPrices.reduce((a, b) => a + b, 0);
+    // the data comes from backend no mannipolation fron the front end
+  
    
 
     let order = new Order({
@@ -55,7 +63,7 @@ router.post('/', async (req,res)=>{
         totalPrice: totalPrice,
         user: req.body.user,
     })
-    console.log(order);
+   
     order = await order.save();
 
     if(!order)
