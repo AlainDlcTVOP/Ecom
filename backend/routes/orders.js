@@ -47,7 +47,7 @@ router.post('/', async (req,res)=>{
     }))
     
     const totalPrice = totalPrices.reduce((a, b) => a + b, 0);
-    // the data comes from backend no mannipolation fron the front end
+    // the data comes from backend no Snnnake fron the front end
   
    
 
@@ -132,5 +132,26 @@ router.delete('/:id', (req, res) => {
     })
 })
 
+router.get('/get/totalsales', async (req, res) => {
+    const totalSales = await Order.aggregate([
+    { $group: { _id: null, totalsales  : {$sum : '$totalPrice'}}}// $sum reserved word in moongose
+    ])
+    if (!totalSales) {
+        return res.status(400).send('The order sales cannot be genereted')
+
+    }
+    res.send({ totalSales: totalSales.pop().totalsales });
+})
+
+router.get(`/get/count`, async (req, res) =>{
+    const orderCount = await Order.countDocuments((count) => count)
+
+    if(!orderCount) {
+        res.status(500).json({success: false})
+    } 
+    res.send({
+        orderCount:orderCount
+    });
+})
 
 module.exports =router;
