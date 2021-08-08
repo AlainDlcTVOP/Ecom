@@ -5,14 +5,29 @@ const router = express.Router();
 const mongoose = require('mongoose');
 const multer = require('multer');
 
+// standard format for image
+const FILE_TYP_MAP = {
+    'image/png': 'png',
+    'image/jpeg': 'jpeg',
+    'image/jpg': 'jpg',
+}
+
 // https://github.com/expressjs/multer#readme docs
 // controll of the destination and the controll of the filename
 const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, 'public/uploads')
+    destination: function (req, file, cb) {
+        const isValid = FILE_TYP_MAP[file.mimetype];
+        let UploadError = new Error('invalid image type');
+
+        if (isValid) {
+            UploadError = null
+        }
+    // checks isValid in the callback uploadError
+    cb(UploadError, 'public/uploads')
   },
-  filename: function (req, file, cb) {
-      const fileName = file.originalname.replace(' ', '-');
+    filename: function (req, file, cb) {
+        const fileName = file.originalname.replace(' ', '-');
+        const extension = FILE_TYP_MAP[file.mimetype];
       cb(null, `${fileName}-${Date.now()}.${extension}`);
   }
 })
