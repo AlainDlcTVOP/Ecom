@@ -1,12 +1,18 @@
-import React, { useState}from 'react';
-import { View, Text ,Button} from 'react-native';
+import React, {useState}from 'react';
+import { View, Text, Button } from 'react-native';
+import Todo from './Todo';
 
 const TodoList = () => {
     const [title, setTilte] = useState('TodoList');
+    // Todo set constans prop
     return (
         <View>
             <Text>{title}</Text>
-            <Button title='Change me' onPress={() => setTilte('My List')}/>
+                <Todo name={'First Todo'}/>  
+            <Todo name={'Second Todo'} />
+            
+            <Button title='Change me' onPress={() => setTilte('My List')} />
+           
         </View>
     )
 }
