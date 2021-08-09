@@ -14,6 +14,8 @@ app.options("*", cors());
 app.use(express.json());
 app.use(morgan("tiny"));
 app.use(authJwt());
+// to see the img in the browser
+app.use('/public/uploads', express.static(__dirname+'/public/uploads'));
 // errorhandling
 app.use(errorHandler);
 
