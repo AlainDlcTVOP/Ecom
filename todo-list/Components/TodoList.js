@@ -10,9 +10,9 @@ import {
 import Todo from "./Todo";
 
 const TodoList = () => {
-  const [title, setTilte] = useState("TodoList");
+  const [title, setTilte] = useState("86400 JUST DO IT");
   const [text, setText] = useState();
-  const [list, setList] = useState(["Hello World"]); // list array []
+  const [list, setList] = useState([]); // list array []
   // Todo set constans prop
 
   // ADD ITEM METHOD
