@@ -25,7 +25,8 @@ const ProductContainer = () => {
       <Text>Product Container</Text>
       <View style={{ marginTop: 100 }}>
         <FlatList
-          horizontal
+         horizontal={false}
+         numColumns={2}
           data={products}
           renderItem={({ item }) => <ProductList key={item.id} item={item} />}
           keyExtractor={(item) => item.name}
