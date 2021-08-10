@@ -4,20 +4,32 @@ import Todo from './Todo';
 
 const TodoList = () => {
     const [title, setTilte] = useState('TodoList');
+    const [text, setText] = useState();
+    const [list, setList] = useState(['Hello World']); // list array []
     // Todo set constans prop
+
+    const addItem = () => {
+        const updatedList = list; // reference to list
+        updatedList.push(text) // update the list with text it will be changed
+        setList(updatedList) // set the List
+        setText(''); //so the text input will be empty
+    }
     return (
         <View style={{ width: '80%', marginBottom: 60 }}>
-           
-            <Text style={[styles.align, styles.font]}>{title}</Text>
-            <ScrollView>
-                <Todo name={'First Todo'}/>  
-                <Todo name={'Second Todo'} />
+           <Text style={[styles.align, styles.font]}>{title}</Text>
+            <ScrollView> 
+                {list.map((x, index) =>
+                    <Todo key={index} item={x} index={index}
+                    />)}
             </ScrollView>
             <View>
-
-            </View>
-            <TextInput style={styles.input} />
-            <Button title='Add item' onPress={() => setTilte('My List')} />
+ </View>
+            <TextInput
+                style={styles.input}
+                value={text}
+                onChangeText={(text) => setText(text)}
+            />
+            <Button title='Add item' onPress={addItem} />
            
         </View>
     )
