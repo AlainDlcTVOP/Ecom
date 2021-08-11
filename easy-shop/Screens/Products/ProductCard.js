@@ -33,7 +33,7 @@ const ProductCard = (props) => {
           <View style={{ marginBottom: 60 }}>
             <Button title={'Add'} color={'green'} />
          </View>
-        ): <Text style={{marginTop: 20}}>Currently Unavilable</Text>}
+        ) : <Text style={{marginTop: 20}}>Currently Unavilable</Text>}
         </View>
     )
 }
