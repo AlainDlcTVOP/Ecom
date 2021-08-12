@@ -8,13 +8,15 @@ import {
   Dimensions
 } from "react-native";
 import { Container, Header, Icon, Item, Input, Text } from 'native-base';
-import SearchedProduct from './SearchedProducts';
+import SearchProducts from './SearchProducts';
 import ProductList from "./ProductList";
+import Banner from "../../Shared/Banner";
+
 const data = require('../../assets/data/products.json');
-
-
 var { height } = Dimensions.get('window')
- const ProductContainer = () =>{
+ 
+ 
+const ProductContainer = () =>{
  
     const [products, setProducts] = useState([]);
     const [productsFiltered, setProductsFiltered] = useState([]);
@@ -62,13 +64,13 @@ var { height } = Dimensions.get('window')
                 </Item>
             </Header>
             {focus==true ? (
-                <SearchedProduct
+                <SearchProducts
                 productsFiltered={productsFiltered}
                 />
             ):(
-            <View style={styles.container}>
+            <View style={StyleSheet.container}>
             <View >
-                
+                <Banner />
             </View>
             <View style={{marginTop:100}}>
             <FlatList
@@ -89,6 +91,7 @@ var { height } = Dimensions.get('window')
         
     )
 }
+ 
 const styles = StyleSheet.create({
     container: {
       flexWrap: "wrap",
