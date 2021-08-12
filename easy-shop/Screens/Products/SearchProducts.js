@@ -4,7 +4,7 @@ import { Content, Left, Body, ListItem, Thumbnail, Text } from 'native-base';
 
 var { width } = Dimensions.get("window")
 
-const SearchedProduct = (props) => {
+const SearchProducts = (props) => {
     const { productsFiltered } = props;
     return(
         <Content style={{ width: width }}>
@@ -49,4 +49,4 @@ const styles = StyleSheet.create({
     }
 })
 
-export default SearchedProduct;
+export default SearchProducts;
