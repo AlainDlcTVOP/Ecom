@@ -14,7 +14,7 @@ import Banner from "../../Shared/Banner";
 import CategoryFilter from "./CategoryFilter";
 
 const data = require('../../assets/data/products.json');
-const categories = require('../../assets/data/categories.json');
+const productscategories = require('../../assets/data/categories.json');
 var { height } = Dimensions.get('window')
  
  
@@ -24,6 +24,7 @@ const ProductContainer = () =>{
     const [productsFiltered, setProductsFiltered] = useState([]);
     const [focus, setFocus] = useState();
     const [categories, setCategories] = useState([]);
+    const [productsCtg, setProductsCtg] = useState([]);
     const [active, setActive] = useState();
     const [initialState, setInitialState] = useState([]);
  
@@ -31,7 +32,7 @@ const ProductContainer = () =>{
         setProducts(data);
         setProductsFiltered(data);
         setFocus(false);
-        setCategories(categories);
+        setCategories(productscategories);
         setActive(-1);
         setInitialState(data);
  
@@ -58,6 +59,20 @@ const ProductContainer = () =>{
     const onBlur = () =>{
         setFocus(false);
     }
+
+    // Categories filter the products
+    const changeCtg = (ctg) => {
+        {
+            ctg === 'all'
+                ? [setProductsCtg(initialState), setActive(true)]
+                : [
+                    setProductsCtg(
+                        products.filter((i) => i.category._id === ctg),
+                        setActive(true)
+                    ),
+                ];
+        }
+    }
  
     return(
         <Container>
@@ -83,7 +98,13 @@ const ProductContainer = () =>{
             <View>
               <Banner />
             <View>
-        <CategoryFilter />
+                <CategoryFilter
+                    categories={categories}
+                    CategoryFilter={changeCtg}
+                    productsCtg={productsCtg}
+                    active={active}
+                    setActive={setActive}
+             />
             </View>
             </View>
             <View style={styles.listContainer}>

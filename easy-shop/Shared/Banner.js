@@ -12,6 +12,7 @@ const Banner = () => {
       "https://images.vexels.com/media/users/3/126443/preview2/ff9af1e1edfa2c4a46c43b0c2040ce52-macbook-pro-touch-bar-banner.jpg",
       "https://pbs.twimg.com/media/D7P_yLdX4AAvJWO.jpg",
       "https://www.yardproduct.com/blog/wp-content/uploads/2016/01/gardening-banner.jpg",
+      "https://www.gamerevolution.com/assets/uploads/2021/05/The-Evil-Within-3-release-date.jpg",
     ]);
 
     return () => {
