@@ -11,8 +11,10 @@ import { Container, Header, Icon, Item, Input, Text } from 'native-base';
 import SearchProducts from './SearchProducts';
 import ProductList from "./ProductList";
 import Banner from "../../Shared/Banner";
+import CategoryFilter from "./CategoryFilter";
 
 const data = require('../../assets/data/products.json');
+const categories = require('../../assets/data/categories.json');
 var { height } = Dimensions.get('window')
  
  
@@ -21,16 +23,25 @@ const ProductContainer = () =>{
     const [products, setProducts] = useState([]);
     const [productsFiltered, setProductsFiltered] = useState([]);
     const [focus, setFocus] = useState();
+    const [categories, setCategories] = useState([]);
+    const [active, setActive] = useState();
+    const [initialState, setInitialState] = useState([]);
  
     useEffect(() =>{
         setProducts(data);
         setProductsFiltered(data);
         setFocus(false);
+        setCategories(categories);
+        setActive(-1);
+        setInitialState(data);
  
         return () =>{
             setProducts([])
             setProductsFiltered([])
             setFocus();
+            setCategories([]);
+            setActive();
+            setInitialState(); //to prevent the memory leaks
         }
     }, [])
  
@@ -68,20 +79,21 @@ const ProductContainer = () =>{
                 productsFiltered={productsFiltered}
                 />
             ):(
-            <View style={StyleSheet.container}>
-            <View >
-                <Banner />
+            <View>
+            <View>
+              <Banner />
+            <View>
+        <CategoryFilter />
             </View>
-            <View style={{marginTop:100}}>
+            </View>
+            <View style={styles.listContainer}>
             <FlatList
-               
                 data={products}
-                renderItem={({item}) => <ProductList 
-                key={item.id} 
-                item={item}
-                /> }
                 numColumns={2}
-                keyExtractor={item => item.name}
+                renderItem={({item}) => <ProductList 
+                key={item.brand} 
+                item={item}/> }
+                keyExtractor={item => item.brand}
             />
             </View>
         </View>
