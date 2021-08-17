@@ -18,7 +18,7 @@ const productscategories = require('../../assets/data/categories.json');
 var { height } = Dimensions.get('window')
  
  
-const ProductContainer = () =>{
+const ProductContainer = (props) =>{
  
     const [products, setProducts] = useState([]);
     const [productsFiltered, setProductsFiltered] = useState([]);
@@ -33,6 +33,7 @@ const ProductContainer = () =>{
         setProductsFiltered(data);
         setFocus(false);
         setCategories(productscategories);
+        setProductsCtg(data);
         setActive(-1);
         setInitialState(data);
  
@@ -74,7 +75,8 @@ const ProductContainer = () =>{
         }
     }
  
-    return(
+    return (
+        
         <Container>
             <Header searchBar rounded>
                 <Item>
@@ -93,35 +95,43 @@ const ProductContainer = () =>{
                 <SearchProducts
                 productsFiltered={productsFiltered}
                 />
-            ):(
-            <View>
-            <View>
-              <Banner />
-            <View>
-                <CategoryFilter
-                    categories={categories}
-                    CategoryFilter={changeCtg}
-                    productsCtg={productsCtg}
-                    active={active}
-                    setActive={setActive}
-             />
-            </View>
-            </View>
-            <View style={styles.listContainer}>
-            <FlatList
-                data={products}
-                numColumns={2}
-                renderItem={({item}) => <ProductList 
-                key={item.brand} 
-                item={item}/> }
-                keyExtractor={item => item.brand}
-            />
-            </View>
-        </View>
+            ) : (
+                <ScrollView>
+                <View>
+                  <View>
+                    <Banner />
+                  </View>
+                  <View>
+                    <CategoryFilter
+                      categories={categories}
+                      categoryFilter={changeCtg}
+                      productsCtg={productsCtg}
+                      active={active}
+                      setActive={setActive}
+                    />
+                  </View>
+                  {productsCtg.length > 0 ? (
+                  <View style={styles.listContainer}>
+                      {productsCtg.map((item) => {
+                          return(
+                              <ProductList     
+                                  key={item._id.$oid}
+                                  item={item}
+                              />
+                          )
+                      })}
+                  </View>
+                  ) : (
+                      <View style={[styles.center, { height: height / 2}]}>
+                          <Text>No products found</Text>
+                      </View>
+                  )}
+                 
+                </View>
+              </ScrollView>
             )}
-            
-        </Container>
-        
+           
+           </Container>
     )
 }
  
