@@ -111,16 +111,17 @@ const ProductContainer = (props) =>{
                     />
                   </View>
                   {productsCtg.length > 0 ? (
-                  <View style={styles.listContainer}>
-                      {productsCtg.map((item) => {
-                          return(
-                              <ProductList     
-                                  key={item._id.$oid}
-                                  item={item}
-                              />
-                          )
-                      })}
-                  </View>
+                   <View style={styles.listContainer}>
+                   {productsCtg.map((item) => {
+                       return(
+                           <ProductList
+                               navigation={props.navigation}
+                               key={item.name}
+                               item={item}
+                           />
+                       )
+                   })}
+               </View>
                   ) : (
                       <View style={[styles.center, { height: height / 2}]}>
                           <Text>No products found</Text>
