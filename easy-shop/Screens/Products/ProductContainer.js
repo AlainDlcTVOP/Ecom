@@ -93,6 +93,7 @@ const ProductContainer = (props) =>{
             </Header>
             {focus==true ? (
                 <SearchProducts
+                navigation={props.navigation}
                 productsFiltered={productsFiltered}
                 />
             ) : (
