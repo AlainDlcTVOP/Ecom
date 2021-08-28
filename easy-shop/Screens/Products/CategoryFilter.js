@@ -2,9 +2,6 @@ import React from 'react';
 import { StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
 import { ListItem, Badge, Text } from 'native-base';
 
-
-
-
 const CategoryFilter = (props) => {
 
     return(
@@ -28,24 +25,28 @@ const CategoryFilter = (props) => {
                         <Text style={{ color: 'white' }}>All</Text>
                     </Badge>
                 </TouchableOpacity>
-                {props.categories.map((item) => (
-                      <TouchableOpacity
-                      key={item._id.$oid}
-                      onPress={() => {
-                          props.categoryFilter(item._id.$oid), 
-                          props.setActive(props.categories.indexOf(item))
-                      }}
-                  >
-                      <Badge
-                          style={[styles.center, 
-                            {margin: 5},
-                            props.active == props.categories.indexOf(item) ? styles.active : styles.inactive
-                          ]}
-                      >
-                          <Text style={{ color: 'white' }}>{item.name}</Text>
-                      </Badge>
-                  </TouchableOpacity>
-                ))}
+                
+                {props.categories.map((item) => {
+                   return (
+                        
+                        <TouchableOpacity
+                            key={item._id.$oid}
+                            onPress={() => {
+                                props.categoryFilter(item._id.$oid),
+                                    props.setActive(props.categories.indexOf(item))
+                            }}
+                        >
+                            <Badge
+                                style={[styles.center,
+                                { margin: 5 },
+                                props.active == props.categories.indexOf(item) ? styles.active : styles.inactive
+                                ]}
+                            >
+                                <Text style={{ color: 'white' }}>{item.name}</Text>
+                            </Badge>
+                        </TouchableOpacity>
+                    )
+                })}
             </ListItem>
         </ScrollView>
     )
