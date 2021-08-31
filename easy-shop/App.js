@@ -1,6 +1,11 @@
 import React from "react";
 import {  LogBox } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
+
+// Redux
+import { Provider } from 'react-redux';
+import store from './Redux/store';
+
 // Navigatiors
 import Main from './Navigator/Main';
 
