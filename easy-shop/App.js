@@ -16,11 +16,13 @@ import Header from "./Shared/Header";
 export default function App() {
   LogBox.ignoreLogs(['Remote debugger']);
   return (
+    <Provider store={store}>
     <NavigationContainer>
-    <Header />
-    <Main />
-   
-  </NavigationContainer>
+      <Header />
+      <Main />
+     
+    </NavigationContainer>
+  </Provider>
   );
 }
 
