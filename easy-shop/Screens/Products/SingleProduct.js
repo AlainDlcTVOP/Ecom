@@ -14,7 +14,7 @@ const SingleProduct = (props) => {
                     <Image 
                         source={{
                             uri: item.image ? item.image 
-                            : 'https://cdn.pixabay.com/photo/2012/04/01/17/29/box-23649_960_720.png'
+                            : 'https://upload.wikimedia.org/wikipedia/commons/d/dd/Kawasaki_Ninja_250_2018.jpg'
                         }}
                         resizeMode="contain"
                         style={styles.image}
