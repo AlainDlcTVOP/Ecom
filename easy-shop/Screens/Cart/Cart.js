@@ -24,7 +24,7 @@ const Cart = (props) => {
     props.cartItems.forEach(cart => {
         return (total += cart.product.price)
     });
-    
+
     return(
         <>
             {props.cartItems.length ? (
@@ -57,7 +57,9 @@ const Cart = (props) => {
                             <Text style={styles.price}>$ {total}</Text>
                         </Left>
                         <Right>
-                            <Button title='Clear'/>
+                            <Button title='Clear'
+                             onPress={() => props.clearCart()}
+                            />
                         </Right>
                         <Right>
                             <Button title='Checkout'
@@ -84,6 +86,12 @@ const mapStateToProps = (state) => {
     }
 }
 
+const mapDispatchToProps = (dispatch) => {
+    return {
+      clearCart: () => dispatch(actions.clearCart())
+     
+      }
+  }
 const styles = StyleSheet.create({
     emptyContainer: {
         height: height,
@@ -116,4 +124,4 @@ const styles = StyleSheet.create({
     }
 })
  
-export default connect(mapStateToProps,null)(Cart);
+export default connect(mapStateToProps,mapDispatchToProps)(Cart);
