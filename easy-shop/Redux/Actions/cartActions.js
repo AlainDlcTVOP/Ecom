@@ -19,11 +19,10 @@ export const removeFromCart = (payload) => {
 }
 
 
-export const clearFromCart = () => {
+export const clearCart = () => {
     return {
-        type: CLEAR_CART,
-        
-   }
+        type: CLEAR_CART
+    }
 }
 
 
