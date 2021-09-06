@@ -27,7 +27,7 @@ const Cart = (props) => {
         return (total += cart.product.price)
     });
 
-    return(
+    return( 
         <>
             {props.cartItems.length ? (
                 <Container>
