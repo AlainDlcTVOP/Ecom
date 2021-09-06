@@ -1,4 +1,4 @@
-# 1.To folow the procject please install nodjs
+# 1.To follow the procject please install nodjs
 ## 2.Download zip and open the project
 ## 3.Start the andriod studio for android emeluter
 ## 4.npm install -s 
