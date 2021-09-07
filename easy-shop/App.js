@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import {  LogBox } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 
@@ -13,9 +13,13 @@ import Main from './Navigator/Main';
 
 import Header from "./Shared/Header";
 
+
+
 export default function App() {
+
   LogBox.ignoreLogs(['Remote debugger']);
   return (
+    
     <Provider store={store}>
     <NavigationContainer>
       <Header />
