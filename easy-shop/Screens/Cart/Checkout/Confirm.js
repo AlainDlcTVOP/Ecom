@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, StyleSheet ,Dimensions, ScrollView} from 'react-native';
+import { View, StyleSheet ,Dimensions, ScrollView,Button} from 'react-native';
 import {
     Text,
     Left,
@@ -12,9 +12,18 @@ import {
 import { connect } from 'react-redux';
 import * as actions from '../../../Redux/Actions/cartActions'
 
-var { height } = Dimensions.get('window');
+
+var {width, height } = Dimensions.get('window');
 
 const Confirm = (props) => {
+
+    const confirmOrder = () => {
+
+        setTimeout(() => {
+            props.clearCart();
+            props.navigation.navigate('Cart')
+        },500)
+    }
 
     const confirm = props.route.params;
 
@@ -26,7 +35,7 @@ const Confirm = (props) => {
                 </Text>
                 {props.route.params ?
                     <View style={{borderWidth:1, borderColor: 'orange'}}>
-                        <Text style={styles.shippning}>Shipping to:</Text>
+                        <Text style={styles.title}>Shipping to:</Text>
                         <View style={{ padding: 8 }}>
                         <Text>Address: {confirm.order.order.shippingAddress1}</Text>
                         <Text>Address2: {confirm.order.order.shippingAddress2}</Text>
@@ -35,12 +44,45 @@ const Confirm = (props) => {
                         <Text>Country: {confirm.order.order.country}</Text>
 
                         </View>
+                        <Text style={styles.title}>items:</Text>
+                        {confirm.order.order.orderItems.map((x) => {
+                            return (
+                                <ListItem
+                                    style={styles.listItem}
+                                    key={x.product.name}
+                                    avatar
+                                >
+                                    <Left>
+                                        <Thumbnail source={{uri: x.product.image}}/>
+                                    </Left>
+                                    <Body style={styles.body}>
+                                        <Left>
+                                            <Text>{x.product.name}</Text>
+                                        </Left>
+                                        <Right>
+                                            <Text>$ {x.product.price}</Text>
+                                        </Right>
+                                    </Body>
+                                </ListItem>
+                            )
+                        })}
                    </View>
-                :null}
+                    : null}
+                <View style={{ alignItems: 'center', margin: 20 }}>
+                    <Button title={'Place order'} onPress={confirmOrder}/>
+
+                </View>
             </View>
         </ScrollView>
     )
 }
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        clearCart: () => dispatch(actions.clearCart())
+    }
+}
+
 const styles = StyleSheet.create({
     container: {
         height: height,
@@ -53,12 +95,23 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         margin:8
     },
-    shippning: {
+    title: {
         alignSelf: 'center',
         margin: 8,
         fontSize: 16,
         fontWeight: 'bold'
+    },
+    listItem: {
+        alignItems: 'center',
+        backgroundColor: 'white',
+        justifyContent: 'center',
+        width:width / 1.2
+    },
+    body: {
+        margin: 10,
+        alignItems: 'center',
+        flexDirection: 'row'
     }
 });
 
-export default Confirm;
+export default connect(null,mapDispatchToProps)(Confirm);
