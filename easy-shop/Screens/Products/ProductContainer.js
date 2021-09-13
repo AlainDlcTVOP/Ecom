@@ -13,11 +13,13 @@ import ProductList from "./ProductList";
 import Banner from "../../Shared/Banner";
 import CategoryFilter from "./CategoryFilter";
 
-const data = require('../../assets/data/products.json');
+
 const productscategories = require('../../assets/data/categories.json');
 var { height } = Dimensions.get('window')
  
- 
+import baseUrl from '../../assets/common/baseUrl';
+import axios from 'axios';
+
 const ProductContainer = (props) =>{
  
     const [products, setProducts] = useState([]);
@@ -29,13 +31,20 @@ const ProductContainer = (props) =>{
     const [initialState, setInitialState] = useState([]);
  
     useEffect(() =>{
-        setProducts(data);
-        setProductsFiltered(data);
+        
         setFocus(false);
         setCategories(productscategories);
-        setProductsCtg(data);
         setActive(-1);
-        setInitialState(data);
+     
+
+        axios
+            .get(`${baseUrl}products`)
+            .then((res) => {
+                setProducts(res.data);
+                setProductsFiltered(res.data);
+                setProductsCtg(res.data);
+                setProductsCtg(res.data);
+        })
  
         return () =>{
             setProducts([])
@@ -117,7 +126,7 @@ const ProductContainer = (props) =>{
                        return(
                            <ProductList
                            navigation={props.navigation}
-                           key={item._id.$oid}
+                           key={item._id}
                            item={item}
                            />
                        )
