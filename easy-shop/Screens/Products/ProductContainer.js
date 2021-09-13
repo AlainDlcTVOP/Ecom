@@ -14,7 +14,7 @@ import Banner from "../../Shared/Banner";
 import CategoryFilter from "./CategoryFilter";
 
 
-const productscategories = require('../../assets/data/categories.json');
+
 var { height } = Dimensions.get('window')
  
 import baseUrl from '../../assets/common/baseUrl';
@@ -33,10 +33,9 @@ const ProductContainer = (props) =>{
     useEffect(() =>{
         
         setFocus(false);
-        setCategories(productscategories);
         setActive(-1);
      
-
+        // Products
         axios
             .get(`${baseUrl}products`)
             .then((res) => {
@@ -44,6 +43,18 @@ const ProductContainer = (props) =>{
                 setProductsFiltered(res.data);
                 setProductsCtg(res.data);
                 setProductsCtg(res.data);
+            }).catch((error) => {
+                console.log('Api call error')
+            })
+        
+        // Categories
+        axios
+            .get(`${baseUrl}categories`)
+            .then((res) => {
+              setCategories(res.data)
+            })
+            .catch((error) => {
+            console.log('Api call error')
         })
  
         return () =>{
