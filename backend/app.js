@@ -3,7 +3,7 @@ const app = express();
 const morgan = require("morgan");
 const mongoose = require("mongoose");
 const cors = require("cors");
-require("dotenv/config");
+require('dotenv/config');
 const authJwt = require('./helper/jwt');
 const errorHandler = require('./helper/error-handler');
 
@@ -47,7 +47,14 @@ mongoose
     console.log(err);
   });
 
-//Server
-app.listen(3000, () => {
+//Server Development
+/*app.listen(3000, () => {
   console.log("server is running http://localhost:3000");
-});
+}); */
+
+//Server Production
+
+var server = app.listen(process.env.PORT || 3000, function () {
+  var port = server.address().port;
+  console.log("Express is working on port " + port);
+})
