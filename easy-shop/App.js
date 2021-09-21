@@ -1,6 +1,7 @@
 import React, {useEffect} from "react";
 import {  LogBox } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
+import Toast from "react-native-toast-message";
 
 // Redux
 import { Provider } from 'react-redux';
@@ -23,7 +24,8 @@ export default function App() {
     <Provider store={store}>
     <NavigationContainer>
       <Header />
-      <Main />
+        <Main />
+        <Toast ref={(ref) => Toast.setRef(ref)} />
      
     </NavigationContainer>
   </Provider>
