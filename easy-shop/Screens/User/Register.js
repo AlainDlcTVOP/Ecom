@@ -4,6 +4,8 @@ import FormContainer from '../../Shared/Form/FromContainer';
 import Input from '../../Shared/Form/Input';
 import Error from '../../Shared/Error';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import axios from 'axios';
+import baseURL from '../../assets/common/baseUrl';
 
 const Register = (props) => {
 
@@ -14,9 +16,33 @@ const Register = (props) => {
     const [error, setError] = useState('');
 
     const register = () => {
-        if (email === "" || name === "" || phone ===""|| password==="") {
+        if (email === "" ||
+            name === "" ||
+            phone === "" ||
+            password === "") {
             setError("Please fill in the form correctly")
         }
+
+        let user = {
+            name: name,
+            email: email,
+            password: password,
+            phone: phone,
+            isAdmin:false
+        }
+        axios
+            .post(`${baseURL}user/register`, user)
+            .then((res) => {
+                if (res.status == 200) {
+                
+                    setTimeout(() => {
+                        props.navigation.navigate("Login");
+                    },500)
+            }
+            })
+            .catch((error) => {
+            
+        })
     }
 
     return (
