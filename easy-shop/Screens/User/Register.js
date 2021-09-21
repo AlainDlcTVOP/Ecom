@@ -3,7 +3,9 @@ import { Text, View, StyleSheet,Button } from 'react-native';
 import FormContainer from '../../Shared/Form/FromContainer';
 import Input from '../../Shared/Form/Input';
 import Error from '../../Shared/Error';
+import Tost from 'react-native-toast-message';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+
 import axios from 'axios';
 import baseURL from '../../assets/common/baseUrl';
 
@@ -31,18 +33,28 @@ const Register = (props) => {
             isAdmin:false
         }
         axios
-            .post(`${baseURL}user/register`, user)
+            .post(`${baseURL}users/register`, user)
             .then((res) => {
                 if (res.status == 200) {
-                
+                    Tost.show({
+                        topOffset: 60,
+                        type: 'success',
+                        text1: 'Registration Succeeded',
+                        text2: 'Please login into your account'
+                    })
                     setTimeout(() => {
                         props.navigation.navigate("Login");
-                    },500)
-            }
+                    }, 500)
+                }
             })
             .catch((error) => {
-            
-        })
+                Tost.show({
+                    topOffset: 60,
+                    type: 'error',
+                    text1: 'Something went wrong',
+                    text2: 'Please try again'
+                });
+            });
     }
 
     return (
