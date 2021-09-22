@@ -1,53 +1,31 @@
-import React, {useState} from 'react';
-import {StyleSheet} from 'react-native';
-import {
-    Text,
-    Left,
-    Right,
-    ListItem,
-    Thumbnail,
-    Body
-} from 'native-base';
+import React, { useState } from "react";
+import { StyleSheet } from "react-native";
+import { Text, Left, Right, ListItem, Thumbnail, Body } from "native-base";
 
 const CartItem = (props) => {
-    const data = props.item.item.product;
-    const [quantity, setQuantity] = useState(props.item.item.quantity);
-
-    return (
-        <ListItem style={
-                styles.listItem
-            }
-            key={
-                Math.round()
-            }
-            avatar>
-            <Left>
-                <Thumbnail source={
-                    {
-                        uri: data.image
-                            ? data.image
-                            : 'https://upload.wikimedia.org/wikipedia/commons/d/dd/Kawasaki_Ninja_250_2018.jpg'
-                    }
-                }/>
-            </Left>
-            <Body style={
-                styles.body
-            }>
-                <Left>
-                    <Text>{
-                        data.name
-                    }</Text>
-                </Left>
-                <Right>
-                    <Text>$ {
-                        data.price
-                    }</Text>
-                </Right>
-            </Body>
-        </ListItem>
-    )
-}
-
+  const data = props.item.item;
+  return (
+    <ListItem style={styles.listItem} key={Math.random()} avatar>
+      <Left>
+        <Thumbnail
+          source={{
+            uri: data.image
+              ? data.image
+              : "https://upload.wikimedia.org/wikipedia/commons/d/dd/Kawasaki_Ninja_250_2018.jpg",
+          }}
+        />
+      </Left>
+      <Body style={styles.body}>
+        <Left>
+          <Text>{data.name}</Text>
+        </Left>
+        <Right>
+          <Text>$ {data.price}</Text>
+        </Right>
+      </Body>
+    </ListItem>
+  );
+};
 
 const styles = StyleSheet.create({
     listItem: {
@@ -56,12 +34,10 @@ const styles = StyleSheet.create({
         justifyContent: 'center'
     },
     body: {
-        margin:10,
+        margin: 10,
         alignItems: 'center',
         flexDirection: 'row'
-    
     }
-
 })
 
 export default CartItem;
