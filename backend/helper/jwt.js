@@ -12,6 +12,7 @@ function authJwt() {
     }).unless({
         path: [
             // regex online
+            { url: /\/api\/v1\/users(.*)/ , methods :['GET','OPTIONS'] },
             {url: /\/public\/uploads(.*)/, methods: ['GET', 'OPTIONS'] },// exlude aut after uploads
             {url: /\/api\/v1\/products(.*)/, methods: ['GET', 'OPTIONS'] },// exlude aut after products
              {url: /\/api\/v1\/categories(.*)/ ,methods: ['GET','OPTIONS']}, // exlude aut after categories
