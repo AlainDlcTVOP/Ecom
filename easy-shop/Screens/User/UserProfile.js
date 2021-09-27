@@ -38,7 +38,7 @@ const UserProfile = (props) => {
             setUserProfile();
         }
  
-    }, [context.stateUser.isAuthenticated])
+    }, [context.stateUser.isAuthenticated]) 
  
     return (
         <Container style={styles.container}>
