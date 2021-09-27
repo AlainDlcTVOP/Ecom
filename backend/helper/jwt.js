@@ -4,30 +4,27 @@ const expressJwt = require('express-jwt');
 function authJwt() {
     const secret = process.env.secret;
     const api = process.env.API_URL;
-    return expressJwt({
-        secret,
-        algorithms: ['HS256'],
-        isRevoked: isRevoked
 
-    }).unless({
+    return expressJwt({secret, algorithms: ["HS256"], isRevoked: isRevoked}).unless({
         path: [
+
             // regex online
-            { url: /\/api\/v1\/users(.*)/ , methods :['GET','OPTIONS'] },
-            {url: /\/public\/uploads(.*)/, methods: ['GET', 'OPTIONS'] },// exlude aut after uploads
-            {url: /\/api\/v1\/products(.*)/, methods: ['GET', 'OPTIONS'] },// exlude aut after products
-             {url: /\/api\/v1\/categories(.*)/ ,methods: ['GET','OPTIONS']}, // exlude aut after categories
-            `${api}/users/login`,
-            `${api}/users/register`,
+            { url: /\/api\/v1\/products(.*)/, methods: ["GET", "OPTIONS"] },
+            { url: /\/api\/v1\/categories(.*)/, methods: ["GET", "OPTIONS"] },
+            { url: /\/api\/v1\/users(.*)/, methods: ["GET", "OPTIONS"] },
+            { url: /\/api\/v1\/orders(.*)/, methods: ["GET", "POST", "OPTIONS"] }, 
+           `${api}/users/login`,
+            `${api}/users/signin`,
+            `${api}/users/register`, 
         ]
-    })
+    });
 }
 
 async function isRevoked(req, payload, done) {
-    if (!payload.isAdmin) {
-        done(null,true) // reject the token if not admin
-    } 
-    done();
-    
+    if (! payload.isAdmin) {
+        done(null, true) // reject the token if not admin
+    }done();
+
 }
 
 module.exports = authJwt;
