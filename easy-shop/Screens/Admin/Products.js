@@ -1,20 +1,21 @@
-import React, {useState, useCallback} from "react";
+import React, { useState, useCallback } from "react";
 import {
-    View,
-    Text,
-    FlatList,
-    ActivityIndicator,
-    StyleSheet,
-    Dimensions,
-    Button
-} from 'react-native';
-import { header, Item, Input } from 'native-base';
-import Icon from "react-native-vector-icons";
-import { useFocusEffect } from '@react-navigation/native';
+  View,
+  Text,
+  FlatList,
+  ActivityIndicator,
+  StyleSheet,
+  Dimensions,
+  Button
+} from "react-native";
+import { Header, Item, Input } from "native-base"
+import Icon from "react-native-vector-icons/FontAwesome"
+import { useFocusEffect } from "@react-navigation/native"
 
-import axios from 'axios';
-import baseURL from '../../assets/common/baseUrl';
-import { AsyncStorage } from '@react-native-community/async-storage';
+
+import axios from "axios"
+import baseURL from "../../assets/common/baseUrl"
+import AsyncStorage from "@react-native-community/async-storage"
 
 var { height, widht } = Dimensions.get('window');
 
@@ -55,7 +56,32 @@ const Products = (props) => {
 
     return (
         <View>
-            <Text>Products Screen</Text>
+            <View>
+                <Header searchBar rounded>
+                    <Item style={{ padding: 5 }}>
+                        <Icon name="search" />
+                        <Input
+                            placeholder="Search"
+                            // onChange
+                        />
+                    </Item>
+                </Header>
+            </View>
+            
+            {loading ? (
+                <View>
+                    <ActivityIndicator size="large" color="red" />
+                </View>
+                
+            ) : (
+                    <FlatList
+                        data={productFilter}
+                        renderItem={({ item, index }) => (
+                            <Text>{item.name}</Text>
+                        )}
+                        keyExtractor={(item) => item.id}
+                    />
+            )}
         </View>
     )
 }
