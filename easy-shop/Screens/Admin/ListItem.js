@@ -83,7 +83,7 @@ const ListItem = (props) => {
         </View>
     )
 }
-
+ 
 const styles = StyleSheet.create({
     container: {
         flexDirection: 'row',
