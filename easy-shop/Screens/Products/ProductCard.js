@@ -4,8 +4,7 @@ import {
     View,
     Dimensions,
     Image,
-    Text,
-    Button
+    Text  
 } from 'react-native'
 import Toast from 'react-native-toast-message';
 import EasyButton from '../../Shared/StyledComponents/EasyButton';
