@@ -59,7 +59,7 @@ const SingleProduct = (props) => {
                     </View>
                     <Text>
                         {item.description}
-                    </Text>
+                    </Text>   
                </View>
             </ScrollView>
             <View style={styles.bottomContianer}>
