@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Image, View, StyleSheet, Text, ScrollView, Button } from 'react-native';
+import { Image, View, StyleSheet, Text, ScrollView } from 'react-native';
 import { Left, Right, Container, H1 } from 'native-base';
 import Toast from 'react-native-toast-message';
 import EasyButton from '../../Shared/StyledComponents/EasyButton';
