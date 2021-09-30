@@ -4,7 +4,7 @@ const EasyButton = styled.TouchableOpacity`
     flex-direction : row;
     border-radius: 3px;
     padding: 10px;
-    marging: 5px;
+    margin: 5px;
     justify-content: center;
     background: transparent;
 
