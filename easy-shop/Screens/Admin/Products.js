@@ -78,6 +78,18 @@ const Products = (props) => {
         )
     )
 
+    // product filter
+    const searchProduct = (text) => {
+        if (text == "") {
+            setProductFilter(productList)
+        }
+        setProductFilter(
+            productList.filter((i) => 
+                i.name.toLowerCase().includes(text.toLowerCase())
+            )
+        )
+    }
+
     return (
         <View>
             <View>
@@ -86,7 +98,7 @@ const Products = (props) => {
                         <Icon name="search" />
                         <Input
                             placeholder="Search"
-                            // onChange
+                           onChangeText={(text) => searchProduct(text)}
                         />
                     </Item>
                 </Header>
