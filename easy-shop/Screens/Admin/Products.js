@@ -90,6 +90,8 @@ const Products = (props) => {
         )
     }
 
+    // delete function
+
     return (
         <View>
             <View>
