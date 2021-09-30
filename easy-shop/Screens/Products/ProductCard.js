@@ -8,6 +8,7 @@ import {
     Button
 } from 'react-native'
 import Toast from 'react-native-toast-message';
+import EasyButton from '../../Shared/StyledComponents/EasyButton';
 import { connect } from 'react-redux';
 import * as actions from '../../Redux/Actions/cartActions';
 
@@ -34,9 +35,10 @@ const ProductCard = (props) => {
         <Text style={styles.price}>${price}</Text>
         {countInStock > 0 ? (
           <View style={{ marginBottom: 60 }}>
-                    <Button title={'Add'}
-                        color={'green'}
-                       onPress={ () => {
+                    <EasyButton
+                        primary
+                        medium
+                        onPress={ () => {
                                 props.addItemToCart(props);
                                 Toast.show({
                                     topOffset: 60,
@@ -44,7 +46,10 @@ const ProductCard = (props) => {
                                     text1: `${name} added to the cart`,
                                     text2: 'Go to your cart to complete your order'
                                 })
-                            }}/>
+                        }}
+                    >
+                        <Text style={{color: 'white'}}>Add</Text>
+                    </EasyButton>
          </View>
         ) : <Text style={{marginTop: 20}}>Currently Unavilable</Text>}
         </View>
