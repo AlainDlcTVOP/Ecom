@@ -1,18 +1,18 @@
 import React, { useState } from "react";
+import {LogBox} from "react-native";
+
 import {
     View,
     StyleSheet,
     Text,
-    TouchableHighlight,
     TouchableOpacity,
     Dimensions,
-    Button,
     Image,
     Modal
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import EasyButton from "../../Shared/StyledComponents/EasyButton";
-
+LogBox.ignoreLogs(['Remote debugger']);
 var { width } = Dimensions.get('window');
 
 const ListItem = (props) => {
@@ -58,7 +58,7 @@ const ListItem = (props) => {
                         <EasyButton 
                         medium 
                         danger
-                           
+                           onPress={() => [props.delete(props._id), setModalVisible(false)]}
                         >
                             <Text style={styles.textStyle}>Delete</Text>
                         </EasyButton>
