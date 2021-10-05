@@ -17,7 +17,7 @@ import CategoryFilter from "./CategoryFilter";
 
 var { height } = Dimensions.get('window')
  
-import baseURL from '../../assets/common/baseUrl';
+import baseURL from "../../assets/common/baseUrl"
 import axios from 'axios';
 
 const ProductContainer = (props) => {
