@@ -6,9 +6,9 @@ let baseURL = '';
 
 {
     Platform.OS == "android"
-      ? (baseURL = "http://ac74-213-102-85-120.ngrok.io/api/v1/")
+      ? (baseURL = "http://ccf4-213-102-85-120.ngrok.io/api/v1/")
       : (baseURL = "http://localhost:3000/api/v1/");
   }
-
+  
 
 export default baseURL; 

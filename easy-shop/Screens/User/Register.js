@@ -1,11 +1,11 @@
 import React,{useState} from 'react';
-import { Text, View, StyleSheet,Button } from 'react-native';
+import { Text, View, StyleSheet } from 'react-native';
 import FormContainer from '../../Shared/Form/FromContainer';
 import Input from '../../Shared/Form/Input';
 import Error from '../../Shared/Error';
 import Toast from 'react-native-toast-message';
 import EasyButton from '../../Shared/StyledComponents/EasyButton';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+//import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 import axios from 'axios';
 import baseURL from '../../assets/common/baseUrl';
@@ -55,11 +55,7 @@ const Register = (props) => {
     };
   
     return (
-      <KeyboardAwareScrollView
-        viewIsInsideTabBar={true}
-        extraHeight={200}
-        enableOnAndroid={true}
-      >
+      
         <FormContainer title={"Register"}>
           <Input
             placeholder={"Email"}
@@ -105,7 +101,7 @@ const Register = (props) => {
             </EasyButton>
           </View>
         </FormContainer>
-      </KeyboardAwareScrollView>
+      
     );
   };
   
