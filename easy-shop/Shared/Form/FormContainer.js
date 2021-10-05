@@ -7,7 +7,7 @@ const FormContainer = (props) => {
     return (
         <KeyboardAwareScrollView
         viewIsInsideTabBar={true}
-        extraHeight={200}
+        extraHeight={500}
         enableOnAndroid={true}
       
        
