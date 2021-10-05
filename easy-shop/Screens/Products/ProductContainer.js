@@ -7,6 +7,7 @@ import {
   ScrollView,
   Dimensions
 } from "react-native";
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { Container, Header, Icon, Item, Input, Text } from 'native-base';
 import { useFocusEffect } from '@react-navigation/native';
 import SearchProducts from './SearchProducts';
@@ -126,7 +127,10 @@ const ProductContainer = (props) => {
      navigation={props.navigation}
      productsFiltered={productsFiltered} />
    ) : (
-     <ScrollView>
+     <KeyboardAwareScrollView
+          viewIsInsideTabBar={true}
+          extraHeight={200}
+          enableOnAndroid={true}>
        <View>
          <View>
            <Banner />
@@ -159,7 +163,7 @@ const ProductContainer = (props) => {
          )}
         
        </View>
-     </ScrollView>
+     </KeyboardAwareScrollView>
    )}
   </Container>
       ) : (

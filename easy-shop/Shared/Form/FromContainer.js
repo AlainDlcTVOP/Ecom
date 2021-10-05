@@ -1,16 +1,22 @@
 import React from 'react';
-import { ScrollView, Dimensions, StyleSheet, Text } from 'react-native';
-
+import {  Dimensions, StyleSheet, Text } from 'react-native';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 var { width } = Dimensions.get('window');
 
 const FormContainer = (props) => {
     return (
-        <ScrollView
+        <KeyboardAwareScrollView
+        viewIsInsideTabBar={true}
+        extraHeight={200}
+        enableOnAndroid={true}
+      
+       
        
             contentContainerStyle={styles.container}>
             <Text style={styles.title}>{props.title}</Text>
             {props.children}
-        </ScrollView>
+           
+            </KeyboardAwareScrollView>    
     )
 }
 
