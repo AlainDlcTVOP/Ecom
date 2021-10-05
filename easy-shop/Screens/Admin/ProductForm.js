@@ -129,7 +129,18 @@ const ProductForm = (props) => {
                              return <Picker.Item key={c.id} label={c.name} value={c._id} />
                         })}
                     </Picker>
-                </Item>
+            </Item>
+            {err ? <Error message={err} /> : null}
+            <View style={styles.buttonContainer}>
+                <EasyButton
+                    large
+                    primary
+                    // onPressEvent
+
+                >
+                    <Text style={styles.buttonText}>Confirm</Text>
+                 </EasyButton>
+            </View>
        </FormContainer>
     )
 }
@@ -143,10 +154,19 @@ const styles = StyleSheet.create({
         padding: 10,
         marginTop: 10,
         marginLeft: 50,
-        marginRight: 50,
-        color: "white",
-        backgroundColor: "white",
-    },
+        marginRight: 20,
+        alignItems: 'center',
+        alignContent: 'center',
+        },
+            buttonContainer: {
+                width: "80%",
+                marginBottom: 80,
+                marginTop: 20,
+                alignItems: "center"
+                },
+        buttonText: {
+            color: "white"
+        },
     
     
 })
