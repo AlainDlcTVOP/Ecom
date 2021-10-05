@@ -3,8 +3,6 @@ import {
   View,
   StyleSheet,
   ActivityIndicator,
-  FlatList,
-  ScrollView,
   Dimensions
 } from "react-native";
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
@@ -19,7 +17,7 @@ import CategoryFilter from "./CategoryFilter";
 
 var { height } = Dimensions.get('window')
  
-import baseURL from '../../assets/common/baseUrl';
+import baseURL from "../../assets/common/baseUrl"
 import axios from 'axios';
 
 const ProductContainer = (props) => {
