@@ -17,6 +17,7 @@ import Toast from 'react-native-toast-message';
 import AsyncStorage from '@react-native-community/async-storage';
 import baseURL from '../../assets/common/baseUrl';
 import axios from 'axios';
+import * as ImagePicker from "expo-image-picker"
 
 // useEffect for handling api calls
 const ProductForm = (props) => {
@@ -39,6 +40,17 @@ const ProductForm = (props) => {
     const [numReviews, setNumReviews] = useState();
     const [item, setItem] = useState(null);
 
+    useEffect(() => {
+        // Categories
+        axios
+        .get(`${baseURL}categories`)
+        .then((res) => setCategories(res.data))
+        .catch((error) => alert("Error to load categories"));
+        
+        return () => {
+            setCategories([])
+        }
+    }, [])
 
 
     return (
@@ -101,7 +113,23 @@ const ProductForm = (props) => {
                 value={description}
                 onChangeText={(text) => setDescription(text)}
             />
-            
+            <Item picker style={styles.picker} >
+                <Picker
+                    mode="dropdown"
+                    iosIcon={<Icon name="arrow-down" color={"#007aff"} />}
+                    style={{ width: undefined, height:20  }}
+                    enableOnAndroid={true}
+                    placeholder="Select your Category"
+                    selectedValue={pickerValue}
+                    placeholderStyle={{ color: '#007aff' }}
+                    placeholderIconColor="#007aff"
+                    onValueChange={(e) => [setPickerValue(e),setCategory(e)]}
+                    >
+                        {categories.map((c) => {
+                             return <Picker.Item key={c.id} label={c.name} value={c._id} />
+                        })}
+                    </Picker>
+                </Item>
        </FormContainer>
     )
 }
@@ -110,6 +138,16 @@ const styles = StyleSheet.create({
     label: {
         width: '80%',
         marginTop:10
-    }
+    },
+    picker: {
+        padding: 10,
+        marginTop: 10,
+        marginLeft: 50,
+        marginRight: 50,
+        color: "white",
+        backgroundColor: "white",
+    },
+    
+    
 })
 export default ProductForm;
