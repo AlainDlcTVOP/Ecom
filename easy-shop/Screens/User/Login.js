@@ -1,6 +1,6 @@
 import React, {useEffect,useContext, useState} from 'react';
 import { Text, View, StyleSheet ,Button} from 'react-native';
-import FormContainer from '../../Shared/Form/FromContainer';
+import FormContainer from '../../Shared/Form/FormContainer';
 import Input from '../../Shared/Form/Input';
 import Error from '../../Shared/Error';
 import EasyButton from '../../Shared/StyledComponents/EasyButton';

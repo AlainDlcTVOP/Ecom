@@ -1,6 +1,6 @@
 import React,{useState} from 'react';
 import { Text, View, StyleSheet } from 'react-native';
-import FormContainer from '../../Shared/Form/FromContainer';
+import FormContainer from '../../Shared/Form/FormContainer';
 import Input from '../../Shared/Form/Input';
 import Error from '../../Shared/Error';
 import Toast from 'react-native-toast-message';

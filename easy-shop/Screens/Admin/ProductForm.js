@@ -8,7 +8,7 @@ import {
     Platform
 } from 'react-native';
 import { Item, Picker } from 'native-base';
-import FromContainer from '../../Shared/Form/FromContainer';
+import FormContainer from '../../Shared/Form/FormContainer';
 import Input from '../../Shared/Form/Input';
 import EasyButton from '../../Shared/StyledComponents/EasyButton';
 import Error from '../../Shared/Error';
@@ -42,7 +42,7 @@ const ProductForm = (props) => {
 
 
     return (
-        <FromContainer title="Add Product">
+        <FormContainer title="Add Product">
             <View>
                 <Image source={{ uri: mainImage }} />
                 <TouchableOpacity>
@@ -102,7 +102,7 @@ const ProductForm = (props) => {
                 onChangeText={(text) => setDescription(text)}
             />
             
-       </FromContainer>
+       </FormContainer>
     )
 }
 
