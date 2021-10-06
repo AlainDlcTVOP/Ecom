@@ -17,7 +17,7 @@ import Toast from 'react-native-toast-message';
 import AsyncStorage from '@react-native-community/async-storage';
 import baseURL from '../../assets/common/baseUrl';
 import axios from 'axios';
-import * as ImagePicker from "expo-image-picker"
+import * as ImagePicker from "expo-image-picker";
 
 // useEffect for handling api calls
 const ProductForm = (props) => {
@@ -47,18 +47,43 @@ const ProductForm = (props) => {
         .then((res) => setCategories(res.data))
         .catch((error) => alert("Error to load categories"));
         
+        // Image Picker
+        (async () => {
+            if (Platform.OS !== 'web') {
+                const {
+                    status,
+                } = await ImagePicker.requestCameraPermissionsAsync();
+                if (status !== 'granted') {
+                    alert('Sorry, we need camera roll permission to make this work')
+                }
+            }
+        })();
+        
         return () => {
             setCategories([])
         }
     }, [])
 
+    const pickImage = async () => {
+        let result = await ImagePicker.launchImageLibraryAsync({
+            mediaTypes: ImagePicker.MediaTypeOptions.All,
+            allowsEditing: true,
+            aspect: [4, 3],
+            quality:1
+        })
+        if (!result.cancelled) {
+            setMainImage(result.uri);
+            setImage(result.uri);
+        }
+    }
+
 
     return (
         <FormContainer title="Add Product">
-            <View>
-                <Image source={{ uri: mainImage }} />
-                <TouchableOpacity>
-                    <Text>IMAGE</Text>
+            <View style={styles.imageContainer}>
+                <Image style={styles.image} source={{ uri: mainImage }} />
+                <TouchableOpacity onPress={pickImage} style={styles.imagePicker}>
+                    <Icon style={{color: 'white'}}  name="camera"/>
                 </TouchableOpacity>
             </View>
             <View style={styles.label}>
@@ -126,7 +151,7 @@ const ProductForm = (props) => {
                     onValueChange={(e) => [setPickerValue(e),setCategory(e)]}
                     >
                         {categories.map((c) => {
-                             return <Picker.Item key={c.id} label={c.name} value={c._id} />
+                             return <Picker.Item key={c._id} label={c.name} value={c._id} />
                         })}
                     </Picker>
             </Item>
@@ -167,7 +192,32 @@ const styles = StyleSheet.create({
         buttonText: {
             color: "white"
         },
-    
+        
+        imageContainer: {
+            width: 200,
+            height: 200,
+            borderStyle: "solid",
+            borderWidth: 8,
+            padding: 0,
+            justifyContent: "center",
+            borderRadius: 100,
+            borderColor: "#E0E0E0",
+            elevation: 0
+        },
+        image: {
+            width: "100%",
+            height: "100%",
+            borderRadius: 100
+        },
+        imagePicker: {
+            position: "absolute",
+            right: 5,
+            bottom: 5,
+            backgroundColor: "grey",
+            padding: 8,
+            borderRadius: 100,
+            elevation: 20
+        }
     
 })
 export default ProductForm;
