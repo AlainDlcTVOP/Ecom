@@ -41,6 +41,13 @@ const ProductForm = (props) => {
     const [item, setItem] = useState(null);
 
     useEffect(() => {
+
+        AsyncStorage.getItem("jwt")
+            .then((res) => {
+            setToken(res)
+            })
+            .catch((error) => console.log(error));
+
         // Categories
         axios
         .get(`${baseURL}categories`)
@@ -77,6 +84,61 @@ const ProductForm = (props) => {
         }
     }
 
+    // validering
+    const addProduct = () => {
+        if (
+            name == '' ||
+            brand == '' ||
+            price == '' ||
+            description == '' ||
+            countInStock == ''
+        ) {
+            setError("Please fill in the form correctly")
+        }
+
+        let formData = new FormData();
+
+        formData.append('name', name);
+        formData.append('brand', brand);
+        formData.append('price', price);
+        formData.append('description', description);
+        formData.append('countInStock', countInStock);
+        formData.append('richDescripton', richDescripton);
+        formData.append('rating', rating);
+        formData.append('numReviews', numReviews);
+        formData.append('isFeatured', isFeatured);
+
+        const config = {
+            headers: {
+                "Content-Type": "multipart/form-data",
+                Authorization : `Bearer ${token}`
+            }
+        }
+
+        axios
+            .post(`${baseURL}products`, formData, config)
+            .then((res) => {
+                if (res.status == 200 || res.status == 201) {
+                    Toast.show({
+                        topOffset: 60,
+                        type: 'success',
+                        text1: "New Product added",
+                        text2: ""
+                    })
+                    setTimeout(() => {
+                        props.navigation.navigate("Products");
+                    },500)
+            }
+            })
+            .catch((error) => {
+                Toast.show({
+                    topOffset: 60,
+                    type: 'error',
+                    text1: "Somthing went wrong",
+                    text2: "Please try again"
+            })
+        })
+    }
 
     return (
         <FormContainer title="Add Product">
@@ -160,7 +222,7 @@ const ProductForm = (props) => {
                 <EasyButton
                     large
                     primary
-                    // onPressEvent
+                   onPress={() => addProduct()}
 
                 >
                     <Text style={styles.buttonText}>Confirm</Text>
