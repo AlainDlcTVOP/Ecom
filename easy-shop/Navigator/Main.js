@@ -52,7 +52,7 @@ const Main = () => {
         <Tab.Screen
         name="Admin"
         component={AdminNavigator}
-        options={{
+        options={{ 
           tabBarIcon: ({ color }) => (
             <Icon name="cog" color={color} size={30} />
           ),
@@ -63,7 +63,7 @@ const Main = () => {
       <Tab.Screen
         name="User"
         component={UserNavigator}
-        options={{
+        options={{  
           tabBarIcon: ({ color }) => (
             <Icon name="user" color={color} size={30} />
           ),

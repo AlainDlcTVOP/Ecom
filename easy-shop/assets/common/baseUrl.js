@@ -5,7 +5,7 @@ import { Platform } from 'react-native'
 let baseURL = '';
 
 {Platform.OS == 'android'
-? baseURL = 'http://ba7d-213-102-85-120.ngrok.io/api/v1/'
+? baseURL = 'http://7b96-213-102-85-120.ngrok.io/api/v1/'
 : baseURL = 'http://localhost:3000/api/v1/'
 }
 
