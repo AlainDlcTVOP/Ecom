@@ -44,6 +44,20 @@ const ProductForm = (props) => {
 
     useEffect(() => {
 
+        if (!props.route.params) {
+            setItem(null);
+        } else {
+            setItem(props.route.params.item);
+            setBrand(props.route.params.item.brand);
+            setName(props.route.params.item.name);
+            setPrice(props.route.params.item.price.toString());
+            setDescription(props.route.params.item.description);
+            setMainImage(props.route.params.item.image);
+            setImage(props.route.params.item.image);
+            setCategory(props.route.params.item.category._id);
+            setCountInStock(props.route.params.item.countInStock.toString());
+        }
+
         AsyncStorage.getItem("jwt")
             .then((res) => {
             setToken(res)
@@ -101,12 +115,12 @@ const ProductForm = (props) => {
 
         let formData = new FormData();
 
-        const newImageUri = "file:///" + image.split("file:/").join("");
+       // const newImageUri = "file:///" + image.split("file:/").join("");
 
         formData.append("image", {
-            uri: newImageUri,
-            type: mime.getType(newImageUri),
-            name: newImageUri.split("/").pop()
+            uri: image,
+            type: mime.getType(image),
+            name: image.split("/").pop()
         });
         formData.append("name", name);
         formData.append("brand", brand);
@@ -126,7 +140,33 @@ const ProductForm = (props) => {
             }
         }
 
-        axios
+        if (item !== null) {
+            axios
+                .put(`${baseURL}products/${item.id}`, formData, config)
+                .then((res) => {
+                    if(res.status == 200 || res.status == 201) {
+                        Toast.show({
+                            topOffset: 60,
+                            type: "success",
+                            text1: "Product successfuly updated",
+                            text2: ""
+                        });
+                        setTimeout(() => {
+                            props.navigation.navigate("Products");
+                        }, 500)
+                    }
+                })
+                .catch((error) => {
+                    Toast.show({
+                        topOffset: 60,
+                            type: "error",
+                            text1: "Something went wrong",
+                            text2: "Please try again"
+                    })
+                })
+            
+        } else {
+            axios
         .post(`${baseURL}products`, formData, config)
         .then((res) => {
             if(res.status == 200 || res.status == 201) {
@@ -150,6 +190,9 @@ const ProductForm = (props) => {
             })
         })
     } 
+        }
+
+        
 
     return (
         <FormContainer title="Add Product">
@@ -223,9 +266,9 @@ const ProductForm = (props) => {
                     placeholderIconColor="#007aff"
                     onValueChange={(e) => [setPickerValue(e),setCategory(e)]}
                     >
-                        {categories.map((c) => {
-                             return <Picker.Item key={c.id} label={c.name} value={c._id} />
-                        })}
+                        {categories.map(c => {
+            return <Picker.Item key={c.id} label={c.name} value={c._id} />
+          })}
                     </Picker>
             </Item>
             {err ? <Error message={err} /> : null}
