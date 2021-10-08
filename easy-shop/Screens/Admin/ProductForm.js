@@ -1,29 +1,27 @@
-import React,{useEffect,useState} from "react";
-import {
-    View,
+import React, { useState, useEffect } from "react"
+import { 
+    View, 
     Text,
     Image,
     StyleSheet,
     TouchableOpacity,
     Platform
-} from 'react-native';
-import { Item, Picker } from 'native-base';
-import FormContainer from '../../Shared/Form/FormContainer';
-import Input from '../../Shared/Form/Input';
-import EasyButton from '../../Shared/StyledComponents/EasyButton';
-import Error from '../../Shared/Error';
-import Icon from "react-native-vector-icons/FontAwesome";
-import Toast from 'react-native-toast-message';
-import AsyncStorage from '@react-native-community/async-storage';
-import baseURL from '../../assets/common/baseUrl';
-import axios from 'axios';
-import * as ImagePicker from "expo-image-picker";
-// mime accept all image formats
-import mime from 'mime';
+} from "react-native"
+import { Item, Picker } from "native-base"
+import FormContainer from "../../Shared/Form/FormContainer"
+import Input from "../../Shared/Form/Input"
+import EasyButton from "../../Shared/StyledComponents/EasyButton"
+import Error from "../../Shared/Error"
+import Icon from "react-native-vector-icons/FontAwesome"
+import Toast from "react-native-toast-message"
+import AsyncStorage from "@react-native-community/async-storage"
+import baseURL from "../../assets/common/baseUrl"
+import axios from "axios"
+import * as ImagePicker from "expo-image-picker"
+import mime from "mime";
 
-// useEffect for handling api calls
 const ProductForm = (props) => {
-
+    
     const [pickerValue, setPickerValue] = useState();
     const [brand, setBrand] = useState();
     const [name, setName] = useState();
@@ -44,7 +42,7 @@ const ProductForm = (props) => {
 
     useEffect(() => {
 
-        if (!props.route.params) {
+        if(!props.route.params) {
             setItem(null);
         } else {
             setItem(props.route.params.item);
@@ -60,28 +58,28 @@ const ProductForm = (props) => {
 
         AsyncStorage.getItem("jwt")
             .then((res) => {
-            setToken(res)
+                setToken(res)
             })
-            .catch((error) => console.log(error));
+            .catch((error) => console.log(error))
 
         // Categories
         axios
-        .get(`${baseURL}categories`)
-        .then((res) => setCategories(res.data))
-        .catch((error) => alert("Error to load categories"));
-        
+            .get(`${baseURL}categories`)
+            .then((res) => setCategories(res.data))
+            .catch((error) => alert("Error to load categories"));
+
         // Image Picker
         (async () => {
-            if (Platform.OS !== 'web') {
+            if (Platform.OS !== "web") {
                 const {
                     status,
                 } = await ImagePicker.requestCameraPermissionsAsync();
-                if (status !== 'granted') {
-                    alert('Sorry, we need camera roll permission to make this work')
+                if (status !== "granted") {
+                    alert("Sorry, we need camera roll permissions to make this work!")
                 }
             }
         })();
-        
+
         return () => {
             setCategories([])
         }
@@ -92,15 +90,15 @@ const ProductForm = (props) => {
             mediaTypes: ImagePicker.MediaTypeOptions.All,
             allowsEditing: true,
             aspect: [4, 3],
-            quality:1
-        })
+            quality: 1
+        });
+
         if (!result.cancelled) {
             setMainImage(result.uri);
             setImage(result.uri);
         }
-    }
+    };
 
-    // validering
     const addProduct = () => {
         if (
             name == "" ||
@@ -115,12 +113,12 @@ const ProductForm = (props) => {
 
         let formData = new FormData();
 
-       // const newImageUri = "file:///" + image.split("file:/").join("");
+        const newImageUri = "file:///" + image.split("file:/").join("");
 
         formData.append("image", {
-            uri: image,
-            type: mime.getType(image),
-            name: image.split("/").pop()
+            uri: newImageUri,
+            type: mime.getType(newImageUri),
+            name: newImageUri.split("/").pop()
         });
         formData.append("name", name);
         formData.append("brand", brand);
@@ -140,200 +138,186 @@ const ProductForm = (props) => {
             }
         }
 
-        if (item !== null) {
+        if(item !== null) {
             axios
-                .put(`${baseURL}products/${item.id}`, formData, config)
-                .then((res) => {
-                    if(res.status == 200 || res.status == 201) {
-                        Toast.show({
-                            topOffset: 60,
-                            type: "success",
-                            text1: "Product successfuly updated",
-                            text2: ""
-                        });
-                        setTimeout(() => {
-                            props.navigation.navigate("Products");
-                        }, 500)
-                    }
-                })
-                .catch((error) => {
+            .put(`${baseURL}products/${item.id}`, formData, config)
+            .then((res) => {
+                if(res.status == 200 || res.status == 201) {
                     Toast.show({
                         topOffset: 60,
-                            type: "error",
-                            text1: "Something went wrong",
-                            text2: "Please try again"
-                    })
-                })
-            
-        } else {
-            axios
-        .post(`${baseURL}products`, formData, config)
-        .then((res) => {
-            if(res.status == 200 || res.status == 201) {
+                        type: "success",
+                        text1: "Product successfuly updated",
+                        text2: ""
+                    });
+                    setTimeout(() => {
+                        props.navigation.navigate("Products");
+                    }, 500)
+                }
+            })
+            .catch((error) => {
                 Toast.show({
                     topOffset: 60,
-                    type: "success",
-                    text1: "New Product added",
-                    text2: ""
-                });
-                setTimeout(() => {
-                    props.navigation.navigate("Products");
-                }, 500)
-            }
-        })
-        .catch((error) => {
-            Toast.show({
-                topOffset: 60,
-                    type: "error",
-                    text1: "Something went wrong",
-                    text2: "Please try again"
+                        type: "error",
+                        text1: "Something went wrong",
+                        text2: "Please try again"
+                })
             })
-        })
-    } 
-        }
-
-        
+        } else {
+            axios
+            .post(`${baseURL}products`, formData, config)
+            .then((res) => {
+                if(res.status == 200 || res.status == 201) {
+                    Toast.show({
+                        topOffset: 60,
+                        type: "success",
+                        text1: "New Product added",
+                        text2: ""
+                    });
+                    setTimeout(() => {
+                        props.navigation.navigate("Products");
+                    }, 500)
+                }
+            })
+            .catch((error) => {
+                Toast.show({
+                    topOffset: 60,
+                        type: "error",
+                        text1: "Something went wrong",
+                        text2: "Please try again"
+                })
+            })
+        } 
+    }
 
     return (
-        <FormContainer title="Add Product">
-            <View style={styles.imageContainer}>
-                <Image style={styles.image} source={{ uri: mainImage }} />
-                <TouchableOpacity onPress={pickImage} style={styles.imagePicker}>
-                    <Icon style={{color: 'white'}}  name="camera"/>
-                </TouchableOpacity>
-            </View>
+       <FormContainer title="Add Product">
+           <View style={styles.imageContainer}>
+               <Image style={styles.image} source={{uri: mainImage}}/>
+               <TouchableOpacity onPress={pickImage} style={styles.imagePicker}>
+                   <Icon style={{ color: "white"}} name="camera"/>
+               </TouchableOpacity>
+           </View>
+           <View style={styles.label}>
+               <Text style={{ textDecorationLine: "underline"}}>Brand</Text>
+           </View>
+           <Input 
+            placeholder="Brand"
+            name="brand"
+            id="brand"
+            value={brand}
+            onChangeText={(text) => setBrand(text)}
+           />
+           <View style={styles.label}>
+               <Text style={{ textDecorationLine: "underline"}}>Name</Text>
+           </View>
+           <Input 
+            placeholder="Name"
+            name="name"
+            id="name"
+            value={name}
+            onChangeText={(text) => setName(text)}
+           />
             <View style={styles.label}>
-                <Text style={{textDecorationLine: 'underline'}}>Brand</Text>
-            </View>
-            <Input
-                placeholder="Brand"
-                name="brand"
-                id="brand"
-                value={brand}
-                onChangeText={(text) => setBrand(text)}
-            />
-             <View style={styles.label}>
-                <Text style={{textDecorationLine: 'underline'}}>Name</Text>
-            </View>
-            <Input
-                placeholder="Name"
-                name="name"
-                id="name"
-                value={name}
-                onChangeText={(text) => setName(text)}
-            />
+               <Text style={{ textDecorationLine: "underline"}}>Price</Text>
+           </View>
+           <Input 
+            placeholder="Price"
+            name="price"
+            id="price"
+            value={price}
+            keyboardType={"numeric"}
+            onChangeText={(text) => setPrice(text)}
+           />
             <View style={styles.label}>
-                <Text style={{textDecorationLine: 'underline'}}>Price</Text>
-            </View>
-            <Input
-                placeholder="Price"
-                name="price"
-                id="price"
-                value={price}
-                keyboardType={'numeric'}
-                onChangeText={(text) => setPrice(text)}
-            />
+               <Text style={{ textDecorationLine: "underline"}}>Count in Stock</Text>
+           </View>
+           <Input 
+            placeholder="Stock"
+            name="stock"
+            id="stock"
+            value={countInStock}
+            keyboardType={"numeric"}
+            onChangeText={(text) => setCountInStock(text)}
+           />
             <View style={styles.label}>
-                <Text style={{textDecorationLine: 'underline'}}>Count in Stock</Text>
-            </View>
-            <Input
-                placeholder="Stock"
-                name="stock"
-                id="stock"
-                value={countInStock}
-                keyboardType={'numeric'}
-                onChangeText={(text) => setCountInStock(text)}
-            />
-             <View style={styles.label}>
-                <Text style={{textDecorationLine: 'underline'}}>Description</Text>
-            </View>
-            <Input
-                placeholder="Description"
-                name="description"
-                id="description"
-                value={description}
-                onChangeText={(text) => setDescription(text)}
-            />
-            <Item picker style={styles.picker} >
+               <Text style={{ textDecorationLine: "underline"}}>Description</Text>
+           </View>
+           <Input 
+            placeholder="Description"
+            name="description"
+            id="description"
+            value={description}
+            onChangeText={(text) => setDescription(text)}
+           />
+           <Item picker>
                 <Picker
                     mode="dropdown"
-                    iosIcon={<Icon name="arrow-down" color={"#007aff"} />}
-                    style={{ width: undefined, height:20  }}
-                    enableOnAndroid={true}
+                    iosIcon={<Icon color={"#007aff"} name="arrow-down" />}
+                    style={{ width: undefined , height: 100}}
                     placeholder="Select your Category"
                     selectedValue={pickerValue}
-                    placeholderStyle={{ color: '#007aff' }}
+                    placeholderStyle={{ color: "#007aff"}}
                     placeholderIconColor="#007aff"
-                    onValueChange={(e) => [setPickerValue(e),setCategory(e)]}
-                    >
-                        {categories.map(c => {
-            return <Picker.Item key={c.id} label={c.name} value={c._id} />
-          })}
-                    </Picker>
-            </Item>
-            {err ? <Error message={err} /> : null}
-            <View style={styles.buttonContainer}>
-                <EasyButton
-                    large
-                    primary
-                    onPress={() => addProduct()}
-
+                    onValueChange={(e) => [setPickerValue(e), setCategory(e)]}
                 >
-                    <Text style={styles.buttonText}>Confirm</Text>
-                 </EasyButton>
-            </View>
+                    {categories.map((c) => {
+                        return <Picker.Item key={c._id} label={c.name} value={c._id} />
+                    })}
+                </Picker>
+           </Item>
+           {err ? <Error message={err} /> : null}
+           <View style={styles.buttonContainer}>
+               <EasyButton
+                large
+                primary
+                onPress={() => addProduct()}               
+               >
+                   <Text style={styles.buttonText}>Confirm</Text>
+               </EasyButton>
+           </View>
        </FormContainer>
     )
 }
 
 const styles = StyleSheet.create({
     label: {
-        width: '80%',
-        marginTop:10
+        width: "80%",
+        marginTop: 10
     },
-    picker: {
-        padding: 10,
-        marginTop: 10,
-        marginLeft: 50,
-        marginRight: 20,
-        alignItems: 'center',
-        alignContent: 'center',
-        },
-            buttonContainer: {
-                width: "80%",
-                marginBottom: 80,
-                marginTop: 20,
-                alignItems: "center"
-                },
-        buttonText: {
-            color: "white"
-        },
+    buttonContainer: {
+        width: "80%",
+        marginBottom: 80,
+        marginTop: 20,
+        alignItems: "center"
+    },
+    buttonText: {
+        color: "white"
+    },
+    imageContainer: {
+        width: 200,
+        height: 200,
+        borderStyle: "solid",
+        borderWidth: 8,
+        padding: 0,
+        justifyContent: "center",
+        borderRadius: 100,
+        borderColor: "#E0E0E0",
+      
+    },
+    image: {
+        width: "100%",
+        height: "100%",
+        borderRadius: 100
+    },
+    imagePicker: {
+        position: "absolute",
+        right: 5,
+        bottom: 5,
+        backgroundColor: "grey",
+        padding: 8,
+        borderRadius: 100,
         
-        imageContainer: {
-            width: 200,
-            height: 200,
-            borderStyle: "solid",
-            borderWidth: 8,
-            padding: 0,
-            justifyContent: "center",
-            borderRadius: 100,
-            borderColor: "#E0E0E0",
-            elevation: 0
-        },
-        image: {
-            width: "100%",
-            height: "100%",
-            borderRadius: 100
-        },
-        imagePicker: {
-            position: "absolute",
-            right: 5,
-            bottom: 5,
-            backgroundColor: "grey",
-            padding: 8,
-            borderRadius: 100,
-            elevation: 20
-        }
-    
+    }
 })
+
 export default ProductForm;
