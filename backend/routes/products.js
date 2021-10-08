@@ -10,6 +10,7 @@ const FILE_TYP_MAP = {
     'image/png': 'png',
     'image/jpeg': 'jpeg',
     'image/jpg': 'jpg',
+    'image/img': 'img',
 }
 
 // https://github.com/expressjs/multer#readme docs
@@ -66,7 +67,7 @@ router.post(`/`,uploadOptions.single('image'), async (req, res) =>{
     if (!file) return res.status(400).send('No image in the request')
     
     const fileName = req.file.filename
-    const basePath = `${req.protocol}://${req.get('host')}/public/upload/`;
+    const basePath = `${req.protocol}://${req.get('host')}/public/uploads/`;
     let product = new Product({
         name: req.body.name,
         description: req.body.description,
