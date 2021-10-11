@@ -21,9 +21,9 @@ const Item = (props) => {
             <EasyButton
                 danger
                 medium
-                onPress={() => addCategory()}
+                onPress={() => props.delete(props.item._id)}
             >
-                <Text style={{color: 'white', fontWeight:'bold'}}>Delete</Text>
+                <Text style={{ color: "white", fontWeight: "bold"}}>Delete</Text>
             </EasyButton>
         </View>
     )
@@ -38,9 +38,9 @@ const Categories = (props) => {
     useEffect(() => {
         AsyncStorage.getItem("jwt")
             .then((res) => {
-                setToken(res)
+                setToken(res);
             })
-            .catch((error) => console.log(error))
+            .catch((error) => console.log(error));
 
         axios
         .get(`${baseURL}categories`)
@@ -94,7 +94,7 @@ const Categories = (props) => {
                 <FlatList 
                     data={categories}
                     renderItem={({ item, index }) => (
-                        <Item item={item} index={index}/>
+                        <Item item={item} index={index} delete={deleteCategory} />
                     )}
                     keyExtractor={(item) => item._id}
                 />
