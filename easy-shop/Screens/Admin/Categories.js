@@ -21,7 +21,7 @@ const Item = (props) => {
             <EasyButton
                 danger
                 medium
-                //onpress
+                onPress={() => addCategory()}
             >
                 <Text style={{color: 'white', fontWeight:'bold'}}>Delete</Text>
             </EasyButton>
