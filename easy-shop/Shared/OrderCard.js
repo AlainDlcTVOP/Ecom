@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { View, Text, StyleSheet } from 'react-native';
-import { Pikcer } from 'native-base';
+import { Picker } from 'native-base';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import TrafficLight from './StyledComponents/TrafficLight';
 import EasyButton from './StyledComponents/EasyButton';
@@ -9,6 +9,14 @@ import Toast from 'react-native-toast-message';
 import { AsyncStorage } from "@react-native-community/async-storage";
 import axios from "axios";
 import baseURL from "../assets/common/baseUrl";
+
+const codes = [
+    { name: "pending", code: "3" },
+    { name: "shipped", code: "2" },
+    {name: "delivered", code: "1"},
+] 
+
+
 
 const OrderCard = (props) => {
     const [orderStatus, setOrderStatus] = useState();
@@ -48,9 +56,54 @@ const OrderCard = (props) => {
     }, []);
 
     return (
-        <View style={styles.container}>
+        <View style={[{backgroundColor:cardColor },styles.container]}>
             <View style={styles.title}>
-                <Text>Order Number: #{props.id}</Text>
+                <Text>Order Number:</Text>
+                <Text># {props.id}</Text>        
+            </View>
+            <View style={{marginTop:10}}>
+                <Text>
+                    Status: {statusText} {orderStatus}
+                </Text>
+                <Text>
+                    Address: {props.shippingAddress1} {props.shippingAddress2}
+                </Text>
+                <Text>
+                    City: {props.city} 
+                </Text>
+                <Text>
+                    Country: {props.country} 
+                </Text>
+                <Text>
+                    Date Ordered: {props.dateOrdered.split("T")[0]} 
+                </Text>
+                <View style={styles.priceContainer}>
+                    <Text>Price: </Text>
+                    <Text style={styles.price}>$ {props.totalPrice}</Text>
+                </View>
+                <Picker
+                    mode="dropdown"
+                    iosIcon={<Icon color={"#007aff"} name="arrow-down"/>}
+                    style={{ width: 150, height: 50 }}
+                    selectedValue={statusChange}
+                    placeholder="Change Status"
+                    placeholderStyle={{ color: "#007aff"}}
+                    placeholderIconColor="#007aff"
+                    onValueChange={(e) => setStatusChange(e)}
+                >
+                    {codes.map((c) => {
+                        return (
+                            <Picker.Item key={c.code} label={c.name} value={c.code} />
+                        )
+                    })}
+                </Picker>
+                <EasyButton
+                        secondary
+                        large
+                        //onpress
+                    >
+                        <Text style={{color:'white'}}>Update</Text>
+                    </EasyButton>
             </View>
         </View>
     )
@@ -64,7 +117,17 @@ const styles = StyleSheet.create({
     },
     title: {
         backgroundColor: '#62B1F6',
-        padding:5
+        padding: 5,
+        
+    },
+    priceContainer: {
+        marginTop: 10,
+        alignSelf: "flex-end",
+        flexDirection:'row'
+    },
+    price: {
+        color: 'white',
+        fontWeight: 'bold'
     }
 })
 export default OrderCard;
