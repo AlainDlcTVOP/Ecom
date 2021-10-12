@@ -133,7 +133,7 @@ const mapStateToProps = (state) => {
     const { cartItems } = state;
     return {
         cartItems: cartItems,
-    }
-}
+    } 
+} 
 
 export default connect(mapStateToProps)(Checkout)
