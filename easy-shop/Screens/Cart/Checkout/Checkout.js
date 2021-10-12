@@ -37,6 +37,8 @@ const Checkout = (props) => {
             phone,
             shippingAddress1: address,
             shippingAddress2: address2,
+            status: "3",
+            user,
             zip,                  
         }
                                 //pass the order to payment
