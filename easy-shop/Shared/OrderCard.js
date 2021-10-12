@@ -24,12 +24,14 @@ const OrderCard = (props) => {
   const [cardColor, setCardColor] = useState();
  
   useEffect(() => {
-    AsyncStorage.getItem("jwt")
-      .then((res) => {
-        setToken(res);
-      })
-      .catch((err) => console.log(err));
- 
+    if (props.editMode) {
+      AsyncStorage.getItem("jwt")
+        .then((res) => {
+          setToken(res);
+        })
+        .catch((error) => console.log(error));
+    }
+
     if (props.status == "3") {
       setOrderStatus(<TrafficLight unavailable></TrafficLight>);
       setStatusText("pending");
@@ -43,15 +45,14 @@ const OrderCard = (props) => {
       setStatusText("delivered");
       setCardColor("#2ECC71");
     }
- 
+
     return () => {
       setOrderStatus();
       setStatusText();
       setCardColor();
-      setToken();
     };
   }, []);
- 
+
   const updateOrder = () => {
     const config = {
       headers: {
@@ -73,32 +74,32 @@ const OrderCard = (props) => {
       user: props.user,
       zip: props.zip,
     };
- 
+
     axios
       .put(`${baseURL}orders/${props.id}`, order, config)
       .then((res) => {
         if (res.status == 200 || res.status == 201) {
           Toast.show({
-            topOffset: 80,
+            topOffset: 60,
             type: "success",
-            text1: "Order Edited.",
+            text1: "Order Edited",
             text2: "",
           });
           setTimeout(() => {
             props.navigation.navigate("Products");
-          }, 100);
+          }, 500);
         }
       })
-      .catch((err) =>
+      .catch((error) => {
         Toast.show({
-          topOffset: 80,
+          topOffset: 60,
           type: "error",
-          text1: "Please try again.",
-          text2: "",
-        })
-      );
+          text1: "Something went wrong",
+          text2: "Please try again",
+        });
+      });
   };
- 
+
   return (
     <View style={[{ backgroundColor: cardColor }, styles.container]}>
       <View style={styles.container}>
@@ -118,38 +119,33 @@ const OrderCard = (props) => {
           <Text>Price: </Text>
           <Text style={styles.price}>$ {props.totalPrice}</Text>
         </View>
-        <View
-          style={{
-            borderColor: "transparent",
-            justifyContent: "center",
-            alignSelf: "center",
-            width: "80%",
-            marginTop: 6,
-          }}
-        >
-          <Picker
-            mode="dropdown"
-            iosIcon={<Icon color={"#007aff"} name="arrow-down"/>}
-            style={{ width: 150, height: 50 }}
-            selectedValue={statusChange}
-            placeholder="Change Status"
-            placeholderStyle={{ color: "#007aff"}}
-            placeholderIconColor="#007aff"
-            onValueChange={(e) => setStatusChange(e)}
-          >
-            {codes.map((c) => {
-              return (<Picker.Item key={c.code} label={c.name} value={c.code} />);
-            })}
-          </Picker>
-          <EasyButton secondary large onPress={() => updateOrder()}>
-            <Text style={{ color: "white" }}>Update</Text>
-          </EasyButton>
-        </View>
+        {props.editMode ? (
+          <View>
+            <Picker
+              mode="dropdown"
+              iosIcon={<Icon color={"#007aff"} name="arrow-down" />}
+              style={{ width: undefined }}
+              selectedValue={statusChange}
+              placeholder="Change Status"
+              placeholderIconColor={{ color: "#007aff" }}
+              onValueChange={(e) => setStatusChange(e)}
+            >
+              {codes.map((c) => {
+                return (
+                  <Picker.Item key={c.code} label={c.name} value={c.code} />
+                );
+              })}
+            </Picker>
+            <EasyButton secondary large onPress={() => updateOrder()}>
+              <Text style={{ color: "white" }}>Update</Text>
+            </EasyButton>
+          </View>
+        ) : null}
       </View>
     </View>
   );
 };
- 
+
 const styles = StyleSheet.create({
   container: {
     padding: 20,
@@ -157,7 +153,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
   },
   title: {
-    backgroundColor: "#62b1f6",
+    backgroundColor: "#62B1F6",
     padding: 5,
   },
   priceContainer: {
@@ -170,5 +166,5 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
 });
- 
+
 export default OrderCard;
