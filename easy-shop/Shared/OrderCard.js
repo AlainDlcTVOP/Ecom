@@ -11,7 +11,7 @@ import EasyButton from "./StyledComponents/EasyButton";
 import baseURL from "../assets/common/baseUrl";
  
 const codes = [
-  { name: "pendding", code: "3" },
+  { name: "pending", code: "3" },
   { name: "shipped", code: "2" },
   { name: "delivered", code: "1" },
 ];

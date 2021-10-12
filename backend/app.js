@@ -36,8 +36,11 @@ app.use(`${api}/orders`, ordersRoutes);
 //Database
 mongoose
   .connect(process.env.CONNECTION_STRING, {
+    keepAlive: true,
     useNewUrlParser: true,
     useUnifiedTopology: true,
+    useCreateIndex: true,
+    useFindAndModify: false,
     dbName: "eshop-database",
   })
   .then(() => {
