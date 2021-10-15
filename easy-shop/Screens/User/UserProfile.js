@@ -13,28 +13,29 @@ import { logoutUser } from "../../Context/actions/Auth.actions"
 
 
 const UserProfile = (props) => {
-    const context = useContext(AuthGlobal)
-    const [userProfile, setUserProfile] = useState()
-    const [orders, setOrders] = useState()
+    const context = useContext(AuthGlobal);
+    const [userProfile, setUserProfile] = useState();
+    const [orders, setOrders] = useState();
 
     useFocusEffect(
+        
         useCallback(() => {
-        if (
-            context.stateUser.isAuthenticated === false || 
+        if(
+            context.stateUser.isAuthenticated === false ||
             context.stateUser.isAuthenticated === null
         ) {
             props.navigation.navigate("Login")
         }
 
         AsyncStorage.getItem("jwt")
-            .then((res) => {
-                axios
-                    .get(`${baseURL}users/${context.stateUser.user.sub}`, {
-                        headers: { Authorization: `Bearer ${res}` },
-                    })
-                    .then((user) => setUserProfile(user.data))
-            })
-            .catch((error) => console.log(error))
+        .then((res) => {
+            axios
+                .get(`${baseURL}users/${context.stateUser.user.userId}`, {
+                    headers: { Authorization: `Bearer ${res}` },
+                })
+                .then((user) => setUserProfile(user.data))
+        })
+        .catch((error) => console.log(error))
 
         axios
         .get(`${baseURL}orders`)
@@ -42,40 +43,45 @@ const UserProfile = (props) => {
             const data = x.data;
             console.log(data)
             const userOrders = data.filter(
-                (order) => order.user._id === context.stateUser.user.sub
+                (order) => order.user === context.stateUser.user.userId
+               
             );
+           
             setOrders(userOrders);
         })
         .catch((error) => console.log(error))
 
-        return () => {
-            setUserProfile();
-            setOrders();
-        }
+    return () => {
+        setUserProfile();
+        setOrders();
+    }
 
     }, [context.stateUser.isAuthenticated]))
 
-    return (
-       <Container style={styles.container}>
-           <ScrollView contentContainerStyle={styles.subContainer}>
-               <Text style={{ fontSize: 30 }}>
-                   {userProfile ? userProfile.name : "" }
-               </Text>
-               <View style={{ marginTop: 20 }}>
-                    <Text style={{ margin: 10 }}>
+    return(
+        <Container style={styles.container}>
+            <ScrollView contentContainerStyle={styles.subContainer}>
+                <Text style={{ fontSize: 30}}>
+                    {userProfile ? userProfile.name : ""}
+                </Text>
+                <View style={{marginTop: 20}}>
+                    <Text style={{margin: 10}}>
                         Email: {userProfile ? userProfile.email : ""}
                     </Text>
-                    <Text style={{ margin: 10 }}>
+                    <Text style={{margin: 10}}>
                         Phone: {userProfile ? userProfile.phone : ""}
+                        
                     </Text>
-               </View>
-               <View style={{ marginTop: 80 }}>
+                    
+                </View>
+                
+                <View style={{ marginTop: 80 }}>
                     <Button title={"Sign Out"} onPress={() => [
                         AsyncStorage.removeItem("jwt"),
                         logoutUser(context.dispatch)
                     ]}/>
-               </View>
-               <View style={styles.order}>
+                </View>
+                <View style={styles.order}>
                    <Text style={{ fontSize: 20 }}>My Orders</Text>
                    <View>
                        {orders ? (
@@ -89,8 +95,8 @@ const UserProfile = (props) => {
                        )}
                    </View>
                </View>
-           </ScrollView>
-       </Container>
+            </ScrollView>
+        </Container>
     )
 }
 

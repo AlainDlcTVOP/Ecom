@@ -28,7 +28,7 @@ const Checkout = (props) => {
         setOrderItems(props.cartItems)
 
         if(context.stateUser.isAuthenticated) {
-            setUser(context.stateUser.user.sub)
+            setUser(context.stateUser.user.userId)
         } else {
             props.navigation.navigate("Cart");
             Toast.show({
