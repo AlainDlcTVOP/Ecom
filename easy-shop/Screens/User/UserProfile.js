@@ -24,7 +24,7 @@ const UserProfile = (props) => {
             context.stateUser.isAuthenticated === false ||
             context.stateUser.isAuthenticated === null
         ) {
-            props.navigation.navigate("Login")
+            props.navigation.navigate("Login");
         }
 
         AsyncStorage.getItem("jwt")
@@ -43,7 +43,8 @@ const UserProfile = (props) => {
             const data = x.data;
             console.log(data)
             const userOrders = data.filter(
-                (order) => order.user === context.stateUser.user.userId
+                
+                (order) => order.user._id === context.stateUser.user.userId
                
             );
            

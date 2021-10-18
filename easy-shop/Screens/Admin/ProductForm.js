@@ -253,7 +253,7 @@ const ProductForm = (props) => {
                 <Picker
                     mode="dropdown"
                     iosIcon={<Icon color={"#007aff"} name="arrow-down" />}
-                    style={{ width: undefined , height: 100}}
+                    style={{ width: 50 , height: 100}}
                     placeholder="Select your Category"
                     selectedValue={pickerValue}
                     placeholderStyle={{ color: "#007aff"}}
