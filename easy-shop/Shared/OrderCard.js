@@ -5,11 +5,13 @@ import Icon from "react-native-vector-icons/FontAwesome";
 import Toast from "react-native-toast-message";
 import axios from "axios";
 import AsyncStorage from "@react-native-community/async-storage";
+
  
 import TrafficLight from "./StyledComponents/TrafficLight";
 import EasyButton from "./StyledComponents/EasyButton";
 import baseURL from "../assets/common/baseUrl";
  
+
 const codes = [
   { name: "pendding", code: "3" },
   { name: "shipped", code: "2" },
@@ -86,18 +88,19 @@ const OrderCard = (props) => {
             text2: "",
           });
           setTimeout(() => {
+           
             props.navigation.navigate("Products");
-          }, 100);
+          }, 500);
         }
       })
-      .catch((err) =>
+      .catch((error) => {
         Toast.show({
-          topOffset: 80,
+          topOffset: 60,
           type: "error",
-          text1: "Please try again.",
-          text2: "",
-        })
-      );
+          text1: "Something went wrong",
+          text2: "Please try again",
+        });
+      });
   };
  
   return (
