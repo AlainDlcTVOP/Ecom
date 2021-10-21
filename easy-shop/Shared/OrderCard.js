@@ -13,9 +13,9 @@ import baseURL from "../assets/common/baseUrl";
  
 
 const codes = [
-  { name: "pendding", code: "3" },
-  { name: "shipped", code: "2" },
-  { name: "delivered", code: "1" },
+  {  id:"3", name: "pendding", code: "3" },
+  {  id:"2", name: "shipped", code: "2" },
+  {  id:"1", name: "delivered", code: "1" },
 ];
  
 const OrderCard = (props) => {
@@ -76,6 +76,7 @@ const OrderCard = (props) => {
       zip: props.zip,
     };
  
+     
     axios
       .put(`${baseURL}orders/${props.id}`, order, config)
       .then(console.log("after put"))
@@ -88,19 +89,18 @@ const OrderCard = (props) => {
             text2: "",
           });
           setTimeout(() => {
-           
             props.navigation.navigate("Products");
-          }, 500);
-        }
-      })
-      .catch((error) => {
-        Toast.show({
-          topOffset: 60,
-          type: "error",
-          text1: "Something went wrong",
-          text2: "Please try again",
-        });
-      });
+        }, 100)
+    }
+})
+.catch((error) => {
+    Toast.show({
+        topOffset: 60,
+            type: "error",
+            text1: "Something went wrong",
+            text2: "Please try again"
+    })
+})
   };
  
   return (
@@ -152,7 +152,7 @@ const OrderCard = (props) => {
             onValueChange={(itemValue) => setStatusChange(itemValue)}
           >
             {codes.map((c) => {
-              return (<Picker.Item key={c.code} label={c.name} value={c.code} />);
+               return <Picker.Item key={c.id} label={c.name} value={c.code} />;
             })}
           </Picker>
           <EasyButton secondary large onPress={() => updateOrder()}>
