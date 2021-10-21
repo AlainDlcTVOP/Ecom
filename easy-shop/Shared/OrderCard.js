@@ -26,11 +26,15 @@ const OrderCard = (props) => {
   const [cardColor, setCardColor] = useState();
  
   useEffect(() => {
-    AsyncStorage.getItem("jwt")
+
+    if (props.editMode) {
+      AsyncStorage.getItem("jwt")
       .then((res) => {
         setToken(res);
       })
       .catch((err) => console.log(err));
+    }
+    
  
     if (props.status == "3") {
       setOrderStatus(<TrafficLight unavailable></TrafficLight>);
@@ -122,6 +126,8 @@ const OrderCard = (props) => {
           <Text>Price: </Text>
           <Text style={styles.price}>$ {props.totalPrice}</Text>
         </View>
+        {props.editMode ? (
+          
         <View
           style={{
             borderColor: "transparent",
@@ -154,13 +160,15 @@ const OrderCard = (props) => {
             {codes.map((c) => {
                return <Picker.Item key={c.id} label={c.name} value={c.code} />;
             })}
-          </Picker>
-          <EasyButton secondary large onPress={() => updateOrder()}>
+            </Picker>
+            <EasyButton secondary large onPress={() => updateOrder()}>
             <Text style={{ color: "white" }}>Update</Text>
           </EasyButton>
+            </View>
+        ):null}  
         </View>
       </View>
-    </View>
+    
   );
 };
  
