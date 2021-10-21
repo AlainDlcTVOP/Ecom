@@ -10,9 +10,10 @@ const Banner = () => {
   useEffect(() => {
     setBannerData([
       "https://images.vexels.com/media/users/3/126443/preview2/ff9af1e1edfa2c4a46c43b0c2040ce52-macbook-pro-touch-bar-banner.jpg",
-      "https://pbs.twimg.com/media/D7P_yLdX4AAvJWO.jpg",
       "https://www.yardproduct.com/blog/wp-content/uploads/2016/01/gardening-banner.jpg",
-      "https://www.gamerevolution.com/assets/uploads/2021/05/The-Evil-Within-3-release-date.jpg",
+      "https://cdn.mos.cms.futurecdn.net/jKyZh7AmtzFheyg3GWUn3k.jpg",
+      "https://www.heraldscotland.com/resources/images/7255226.jpg?display=1&htype=0&type=responsive-gallery",
+      "https://www.gizbot.com/img/2018/01/globally-top-selling-smartphones-iphone-x-galaxy-note-8-vivo-x20-and-more-1517223162.jpg"
     ]);
 
     return () => {
