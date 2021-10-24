@@ -16,7 +16,7 @@ import ListItem from "./ListItem";
 
 import axios from "axios"
 import baseURL from "../../assets/common/baseUrl"
-import AsyncStorage from "@react-native-community/async-storage"
+import AsyncStorage from '@react-native-async-storage/async-storage'
 import EasyButton from "../../Shared/StyledComponents/EasyButton";
 
 var { height, width } = Dimensions.get('window');

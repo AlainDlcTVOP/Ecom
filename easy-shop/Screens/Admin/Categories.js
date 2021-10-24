@@ -10,7 +10,7 @@ import {
 import EasyButton from '../../Shared/StyledComponents/EasyButton';
 import baseURL from '../../assets/common/baseUrl';
 import axios from 'axios';
-import AsyncStorage from "@react-native-community/async-storage";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 var { width } = Dimensions.get('window');
 
