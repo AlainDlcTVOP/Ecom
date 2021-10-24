@@ -4,7 +4,7 @@ import { Picker } from "native-base";
 import Icon from "react-native-vector-icons/FontAwesome";
 import Toast from "react-native-toast-message";
 import axios from "axios";
-import AsyncStorage from "@react-native-community/async-storage";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
  
 import TrafficLight from "./StyledComponents/TrafficLight";
