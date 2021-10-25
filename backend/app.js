@@ -24,9 +24,15 @@ const categoriesRoutes = require("./routes/categories");
 const productsRoutes = require("./routes/products");
 const usersRoutes = require("./routes/users");
 const ordersRoutes = require("./routes/orders");
-
+const aws = require('aws-sdk');
 
 const api = process.env.API_URL;
+const uri = process.env.MONGODB_URI;
+
+let s3 = new aws.S3({
+  accessKeyId: process.env.S3_KEY,
+  secretAccessKey: process.env.S3_SECRET
+});
 
 app.use(`${api}/users`, usersRoutes);
 app.use(`${api}/categories`, categoriesRoutes);
@@ -37,10 +43,7 @@ app.use(`${api}/orders`, ordersRoutes);
 mongoose
   .connect(process.env.CONNECTION_STRING, {
     keepAlive: true,
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-    useCreateIndex: true,
-    useFindAndModify: false,
+    useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false,
     dbName: "eshop-database",
   })
   .then(() => {
