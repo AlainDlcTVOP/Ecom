@@ -11,31 +11,28 @@ import TrafficLight from "./StyledComponents/TrafficLight";
 import EasyButton from "./StyledComponents/EasyButton";
 import baseURL from "../assets/common/baseUrl";
  
-
 const codes = [
   {  id:"3", name: "pendding", code: "3" },
   {  id:"2", name: "shipped", code: "2" },
   {  id:"1", name: "delivered", code: "1" },
-];
- 
+]; 
+
 const OrderCard = (props) => {
   const [orderStatus, setOrderStatus] = useState();
   const [statusText, setStatusText] = useState();
   const [statusChange, setStatusChange] = useState();
   const [token, setToken] = useState();
   const [cardColor, setCardColor] = useState();
- 
-  useEffect(() => {
 
+  useEffect(() => {
     if (props.editMode) {
       AsyncStorage.getItem("jwt")
-      .then((res) => {
-        setToken(res);
-      })
-      .catch((err) => console.log(err));
+        .then((res) => {
+          setToken(res);
+        })
+        .catch((error) => console.log(error));
     }
-    
- 
+
     if (props.status == "3") {
       setOrderStatus(<TrafficLight unavailable></TrafficLight>);
       setStatusText("pending");
@@ -49,22 +46,21 @@ const OrderCard = (props) => {
       setStatusText("delivered");
       setCardColor("#2ECC71");
     }
- 
+
     return () => {
       setOrderStatus();
       setStatusText();
       setCardColor();
-      setToken();
     };
   }, []);
- 
+
   const updateOrder = () => {
     const config = {
       headers: {
         Authorization: `Bearer ${token}`,
       },
     };
- 
+
     const order = {
       city: props.city,
       country: props.country,
@@ -79,34 +75,32 @@ const OrderCard = (props) => {
       user: props.user,
       zip: props.zip,
     };
- 
-     
+
     axios
       .put(`${baseURL}orders/${props.id}`, order, config)
-      .then(console.log("after put"))
       .then((res) => {
         if (res.status == 200 || res.status == 201) {
           Toast.show({
-            topOffset: 80,
+            topOffset: 60,
             type: "success",
-            text1: "Order Edited.",
+            text1: "Order Edited",
             text2: "",
           });
           setTimeout(() => {
             props.navigation.navigate("Products");
-        }, 100)
-    }
-})
-.catch((error) => {
-    Toast.show({
-        topOffset: 60,
-            type: "error",
-            text1: "Something went wrong",
-            text2: "Please try again"
-    })
-})
+          }, 500);
+        }
+      })
+      .catch((error) => {
+        Toast.show({
+          topOffset: 60,
+          type: "error",
+          text1: "Something went wrong",
+          text2: "Please try again",
+        });
+      });
   };
- 
+
   return (
     <View style={[{ backgroundColor: cardColor }, styles.container]}>
       <View style={styles.container}>
@@ -127,51 +121,32 @@ const OrderCard = (props) => {
           <Text style={styles.price}>$ {props.totalPrice}</Text>
         </View>
         {props.editMode ? (
-          
-        <View
-          style={{
-            borderColor: "transparent",
-            justifyContent: "center",
-            alignSelf: "center",
-            width: "80%",
-            marginTop: 6,
-          }}
-        >
-          <Picker
-            mode="dropdown"
-            iosIcon={<Icon color={"#007aff"} name="arrow-down" />}
-            style={{
-              justifyContent: "center",
-              alignSelf: "center",
-              paddingTop: 7,
-              paddingBottom: 15,
-              paddingLeft: 20,
-              borderRadius: 40,
-              width: "80%",
-              marginBottom: 10,
-              backgroundColor: "rgba(102,102,102,0.6)",
-            }}
-            placeholder="Change Status"
-            selectedValue={statusChange}
-            placeholderStyle={{ color: "#007aff" }}
-            placeholderIconColor="#007aff"
-            onValueChange={(itemValue) => setStatusChange(itemValue)}
-          >
-            {codes.map((c) => {
-               return <Picker.Item key={c.id} label={c.name} value={c.code} />;
-            })}
+          <View>
+            <Picker
+              mode="dropdown"
+              iosIcon={<Icon color={"#007aff"} name="arrow-down" />}
+              style={{ width: undefined }}
+              selectedValue={statusChange}
+              placeholder="Change Status"
+              placeholderIconColor={{ color: "#007aff" }}
+              onValueChange={(e) => setStatusChange(e)}
+            >
+              {codes.map((c) => {
+                return (
+                  <Picker.Item key={c.id} label={c.name} value={c.code} />
+                );
+              })}
             </Picker>
             <EasyButton secondary large onPress={() => updateOrder()}>
-            <Text style={{ color: "white" }}>Update</Text>
-          </EasyButton>
-            </View>
-        ):null}  
-        </View>
+              <Text style={{ color: "white" }}>Update</Text>
+            </EasyButton>
+          </View>
+        ) : null}
       </View>
-    
+    </View>
   );
 };
- 
+
 const styles = StyleSheet.create({
   container: {
     padding: 20,
@@ -179,7 +154,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
   },
   title: {
-    backgroundColor: "#62b1f6",
+    backgroundColor: "#62B1F6",
     padding: 5,
   },
   priceContainer: {
@@ -192,5 +167,5 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
 });
- 
+
 export default OrderCard;
