@@ -180,7 +180,7 @@ const ProductContainer = (props) => {
       backgroundColor: "gainsboro",
     },
     listContainer: {
-      height: height,
+      height: "50%",
       flex: 1,
       flexDirection: "row",
       alignItems: "flex-start",

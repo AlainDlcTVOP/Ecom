@@ -13,13 +13,13 @@ import {
 import Icon from 'react-native-vector-icons/FontAwesome';
 import EasyButton from "../../Shared/StyledComponents/EasyButton";
 LogBox.ignoreLogs(['Remote debugger']);
-var { width } = Dimensions.get('window');
+var { width } = Dimensions.get("window");
 
 const ListItem = (props) => {
 
-    const [modalVisible, setModalVisible] = useState(false);
-   
-    return (
+    const [modalVisible, setModalVisible] = useState(false)
+
+    return(
         <View>
             <Modal
                 animationType="fade"
@@ -36,9 +36,9 @@ const ListItem = (props) => {
                             onPress={() => {
                                 setModalVisible(false)
                             }}
-                            style={{
+                            style={{ 
                                 alignSelf: "flex-end",
-                                position: 'absolute',
+                                position: "absolute",
                                 top: 5,
                                 right: 10
                             }}
@@ -58,28 +58,28 @@ const ListItem = (props) => {
                         <EasyButton 
                         medium 
                         danger
-                           onPress={() => [props.delete(props._id), setModalVisible(false)]}
+                        onPress={() => [props.delete(props._id), setModalVisible(false)]}
                         >
                             <Text style={styles.textStyle}>Delete</Text>
                         </EasyButton>
                     </View>
                 </View>
-           </Modal>
+
+            </Modal>
             <TouchableOpacity
-                // onPress open Model
                 onPress={() => {
                     props.navigation.navigate("Product Detail", { item: props })
                 }}
-                onLongPress={() => setModalVisible(true) }
+                onLongPress={() => setModalVisible(true)}
                 style={[styles.container, {
                     backgroundColor: props.index % 2 == 0 ? "white" : "gainsboro"
                 }]}
             >
-                <Image
+                <Image 
                     source={{
                         uri: props.image
-                            ? props.image
-                            : 'https://upload.wikimedia.org/wikipedia/commons/d/dd/Kawasaki_Ninja_250_2018.jpg'
+                        ? props.image
+                        : 'https://cdn.pixabay.com/photo/2012/04/01/17/29/box-23649_960_720.png'
                     }}
                     resizeMode="contain"
                     style={styles.image}
@@ -92,7 +92,7 @@ const ListItem = (props) => {
         </View>
     )
 }
- 
+
 const styles = StyleSheet.create({
     container: {
         flexDirection: 'row',

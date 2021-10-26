@@ -50,9 +50,13 @@ const ProductForm = (props) => {
             setName(props.route.params.item.name);
             setPrice(props.route.params.item.price.toString());
             setDescription(props.route.params.item.description);
+            setRichDescription(props.route.params.richDescription);
             setMainImage(props.route.params.item.image);
             setImage(props.route.params.item.image);
             setCategory(props.route.params.item.category._id);
+            setRating(props.route.params.item.rating.toString());
+            setIsFeature(props.route.params.isFeatured);
+            setNumReviews(props.route.params.numReviews.toString());
             setCountInStock(props.route.params.item.countInStock.toString());
         }
 
@@ -123,6 +127,7 @@ const ProductForm = (props) => {
         formData.append("name", name);
         formData.append("brand", brand);
         formData.append("price", price);
+        formData.append("item", item);
         formData.append("description", description);
         formData.append("category", category);
         formData.append("countInStock", countInStock);

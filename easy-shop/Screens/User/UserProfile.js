@@ -103,7 +103,8 @@ const UserProfile = (props) => {
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
+      
+        flex:1,
         alignItems: "center"
     },
     subContainer: {
@@ -111,9 +112,10 @@ const styles = StyleSheet.create({
         marginTop: 60
     },
     order: {
-        marginTop: 20,
+        marginTop: 0,
         alignItems: "center",
-        marginBottom: 60
+        marginBottom: 0
+        
     }
 })
 
