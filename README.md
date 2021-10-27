@@ -9,7 +9,7 @@
 ## 6.Change port in baseUrl to localhost
 ## 7.POSTMAN read and write is in JSON FILE
 ## 8.Use postman to insert categories and pruducts POST http://localhost:3000/api/v1/products
-## 9.Creae a user POST http://localhost:3000/api/v1/user
+## 9.Create a user POST http://localhost:3000/api/v1/user
 ## 10.Get Autorize POST POST http://localhost:3000/api/v1/user/login
-## 11.then run with command expo r -c  
+## 11.Run with command expo r -c  
 ## 12.enjoy
