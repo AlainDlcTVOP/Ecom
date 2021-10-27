@@ -11,7 +11,7 @@
 ## 7.POSTMAN read and write is in JSON FILE
 ## 8.Use postman to insert categories and pruducts POST http://localhost:3000/api/v1/products
 ## 9.Create a user POST http://localhost:3000/api/v1/user
-## 10.Get Autorize POST POST http://localhost:3000/api/v1/user/login
+## 10.Get Autorize POST http://localhost:3000/api/v1/user/login
 ## 11.Run with command expo r -c  
 ## 12.Enjoy
 <br/>
