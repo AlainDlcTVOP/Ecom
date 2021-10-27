@@ -1,8 +1,8 @@
 # 1.To follow the project please install nodjs
 ## 2.Download or clone and open the project
 ## 3.Start the android studio for android awd manager
-## 4.npm install -s 
-## 5.in the env file you will connect your own mongodb password backend 
+## 4.Npm install -s 
+## 5.In the env file you will connect your own mongodb password backend 
 ## CONNECTION_STRING = 
 ## secret = 
 ## API_URL = /api/v1
@@ -13,6 +13,8 @@
 ## 10.Get Autorize POST POST http://localhost:3000/api/v1/user/login
 ## 11.Run with command expo r -c  
 ## 12.Enjoy
+<br/>
+<br/>
 
 ![Ghost](https://user-images.githubusercontent.com/57671826/139060513-4208c97a-c98d-4e50-b3b2-0e14cd83162f.png)
 ![Cart](https://user-images.githubusercontent.com/57671826/139060698-7d53d366-dd10-4c53-ab99-6bdd4323f6d9.png)
