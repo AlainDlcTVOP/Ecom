@@ -3,8 +3,13 @@
 ## 3.Start the android studio for android awd manager
 ## 4.npm install -s 
 ## 5.in the env file you will connect your own mongodb password backend 
-CONNECTION_STRING = 
-secret = 
-API_URL = /api/v1
-## 6.then run with command expo r -c  
-## 7.enjoy
+## CONNECTION_STRING = 
+## secret = 
+## API_URL = /api/v1
+## 6.Change port in baseUrl to localhost
+## 7.POSTMAN read and write is in JSON FILE
+## 8.Use postman to insert categories and pruducts POST http://localhost:3000/api/v1/products
+## 9.Creae a user POST http://localhost:3000/api/v1/user
+## 10.Get Autorize POST POST http://localhost:3000/api/v1/user/login
+## 11.then run with command expo r -c  
+## 12.enjoy
