@@ -12,4 +12,4 @@
 ## 9.Create a user POST http://localhost:3000/api/v1/user
 ## 10.Get Autorize POST POST http://localhost:3000/api/v1/user/login
 ## 11.Run with command expo r -c  
-## 12.enjoy
+## 12.Enjoy
