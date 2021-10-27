@@ -1,7 +1,7 @@
 # To follow the project please install nodeJs
 ## 1.Download or clone and open the project open with vscode
 ## 2.Start the android studio for android awd manager
-## 3.Go to backend folder andpress npm install --force
+## 3.Go to backend folder and press npm install --force
 ## 4.Add an env. file in backend to connect
 ## 5.In the env file you will connect your own mongodb password backend 
 ## CONNECTION_STRING =  mogoose thets you will ket and key from mongouse
