@@ -13,3 +13,13 @@
 ## 10.Get Autorize POST POST http://localhost:3000/api/v1/user/login
 ## 11.Run with command expo r -c  
 ## 12.Enjoy
+
+
+
+
+![Ghost](https://user-images.githubusercontent.com/57671826/139060513-4208c97a-c98d-4e50-b3b2-0e14cd83162f.png)
+![Add](https://user-images.githubusercontent.com/57671826/139060650-69d44303-f94a-4122-aafa-f016a0584633.png)
+![Cart](https://user-images.githubusercontent.com/57671826/139060698-7d53d366-dd10-4c53-ab99-6bdd4323f6d9.png)
+![Admin](https://user-images.githubusercontent.com/57671826/139060713-f0d6b141-1c87-43da-a5d9-501b181dd72a.png)
+![Category](https://user-images.githubusercontent.com/57671826/139060857-70c2843c-b701-440c-bea2-1cf62b055c45.png)
+![Product](https://user-images.githubusercontent.com/57671826/139061063-bce81e91-0839-4b6d-ae9b-8f249e924d63.png)
