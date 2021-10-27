@@ -1,7 +1,7 @@
-# To follow the project please install nodjs
+# To follow the project please install nodeJs
 ## 1.Download or clone and open the project
 ## 2.Start the android studio for android awd manager
-## 3.Npm install -s 
+## 3.Npm install --force
 ## 4.Add an env. file in backend to connect
 ## 5.In the env file you will connect your own mongodb password backend 
 ## CONNECTION_STRING = 
