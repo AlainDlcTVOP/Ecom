@@ -23,7 +23,10 @@
 ## Wish you see all the features contact me so I can authenticate you
 ## Email jd_alain@hotmail.com
 
-![EcomApp](https://user-images.githubusercontent.com/57671826/139216400-3a305413-8a71-4d0d-a32c-95d03a3cb60e.png)
+![QRSHOP](https://user-images.githubusercontent.com/57671826/139299332-6c4486c3-941f-466c-9486-bd2fdb22b7ed.png)
+
+</br>
+
 
 
 ![Ghost](https://user-images.githubusercontent.com/57671826/139060513-4208c97a-c98d-4e50-b3b2-0e14cd83162f.png)
