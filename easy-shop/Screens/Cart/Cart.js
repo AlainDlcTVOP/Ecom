@@ -74,7 +74,7 @@ const Cart = (props) => {
               <View style={styles.hiddenContainer}>
                 <TouchableOpacity 
                 style={styles.hiddenButton}
-                onPress={() => props.removeFromCart(data.item)}
+                onPress={() => props.removeFromCart(data)}
                 >
                   <Icon name="trash" color={"white"} size={30} />
                 </TouchableOpacity>

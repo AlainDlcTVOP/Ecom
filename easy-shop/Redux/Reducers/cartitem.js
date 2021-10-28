@@ -12,6 +12,7 @@ const cartItems = (state = [], action) => {
         case REMOVE_FROM_CART:
             const index = state.findIndex(item => item.id === action.payload.id);
   return state.filter((_, i) => i !== index);
+             
         case CLEAR_CART:
             return state = []
     }
