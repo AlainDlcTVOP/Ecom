@@ -1,22 +1,22 @@
 # To follow the project please install nodeJs
-## 1.Download or clone and open the project open with vscode
-## 2.Start the android studio for android awd manager or install Expo in your phone 
-## 3.Go to backend folder and press npm install --force
-## 5.In the env file you will connect your own mongodb password backend 
+## 1. Download or clone and open the project open with vscode
+## 2. Start the android studio for android awd manager or install Expo in your phone 
+## 3. Go to backend folder and press npm install --force
+## 5. In the env file you will connect your own mongodb password backend 
 
-* CONNECTION_STRING = 
-* secret = kat
-* API_URL = /api/v1
+## * CONNECTION_STRING = ##
+## * secret =  ##
+## * API_URL =  ##
 
-## 6.Go to easy-shop folder then press npm install --force
-## 7.Change port in baseUrl to localhost
-## 8.POSTMAN read and write is in JSON FILE
-## 9.Use postman to insert categories and pruducts POST http://localhost:3000/api/v1/products
-## 10.Create a user POST http://localhost:3000/api/v1/user
-## 11.Get Autorize POST http://localhost:3000/api/v1/user/login
-## 12.Run with command expo r -c
-## 13 Scann the QR code
-## 14.Enjoy
+## 6. Go to easy-shop folder then press npm install --force
+## 7. Change port in baseUrl to localhost
+## 8. POSTMAN read and write is in JSON FILE
+## 9. Use postman to insert categories and products POST http://localhost:3000/api/v1/products
+## 10. Create a user POST http://localhost:3000/api/v1/user
+## 11. Get Autorize POST http://localhost:3000/api/v1/user/login
+## 12. Run with command expo r -c
+## 13. Scann the QR code
+## 14. Enjoy
 <br/>
 
 
