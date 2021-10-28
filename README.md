@@ -19,6 +19,11 @@
 ## 14. Enjoy
 <br/>
 
+## DEMO SCAN URL WITH EXPO (DOWNLOADED FROM PlAY STORE) IT'S FREE 
+## Wish you see all the features contact me so I can authenticate you email me jd_alain@hotmail.com
+
+![EcomApp](https://user-images.githubusercontent.com/57671826/139216400-3a305413-8a71-4d0d-a32c-95d03a3cb60e.png)
+
 
 ![Ghost](https://user-images.githubusercontent.com/57671826/139060513-4208c97a-c98d-4e50-b3b2-0e14cd83162f.png)
 ![Add](https://user-images.githubusercontent.com/57671826/139079854-9e58d27f-8672-4b67-bcce-6a32a5ede33e.png)
