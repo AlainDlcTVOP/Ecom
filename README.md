@@ -20,7 +20,8 @@
 <br/>
 
 ## DEMO SCAN URL WITH EXPO (DOWNLOADED FROM PLAY STORE) IT'S FREE 
-## Wish you see all the features contact me so I can authenticate you email me jd_alain@hotmail.com
+## Wish you see all the features contact me so I can authenticate you
+## Email jd_alain@hotmail.com
 
 ![EcomApp](https://user-images.githubusercontent.com/57671826/139216400-3a305413-8a71-4d0d-a32c-95d03a3cb60e.png)
 
