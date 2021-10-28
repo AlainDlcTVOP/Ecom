@@ -19,7 +19,7 @@
 ## 14. Enjoy
 <br/>
 
-## DEMO SCAN URL WITH EXPO (DOWNLOADED FROM PLAY STORE) IT'S FREE 
+## DEMO SCAN URL WITH EXPO (DOWNLOAD FROM PLAY STORE) IT'S FREE 
 ## Wish you see all the features contact me so I can authenticate you
 ## Email jd_alain@hotmail.com
 
