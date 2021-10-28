@@ -10,7 +10,8 @@ const cartItems = (state = [], action) => {
         case ADD_TO_CART:
             return [...state, action.payload]
         case REMOVE_FROM_CART:
-            return state.filter(cartItems => cartItems !== action.payload)
+            const index = state.findIndex(item => item.id === action.payload.id);
+  return state.filter((_, i) => i !== index);
         case CLEAR_CART:
             return state = []
     }
