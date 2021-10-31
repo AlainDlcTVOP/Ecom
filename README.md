@@ -39,3 +39,8 @@
 ![Orders](https://user-images.githubusercontent.com/57671826/139072881-e9353776-ff31-403a-8307-0ea8d2e8562b.png)
 <br/>
 ![ConsoleOrder](https://user-images.githubusercontent.com/57671826/139068040-d353c717-e3f2-486b-999f-e536fd2f67da.png)
+
+
+</br>
+Privacy policy 
+https://sites.google.com/view/alaineshop/startsida
