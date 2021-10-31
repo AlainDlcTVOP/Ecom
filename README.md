@@ -42,5 +42,6 @@
 
 
 </br>
-Privacy policy 
+Privacy policy: 
+
 https://sites.google.com/view/alaineshop/startsida
