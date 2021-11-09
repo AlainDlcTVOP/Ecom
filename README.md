@@ -21,7 +21,7 @@
 
 ## DEMO SCAN URL WITH EXPO (DOWNLOAD FROM PLAY STORE) IT'S FREE 
 ## Wish you see all the features contact me so I can authenticate you
-## Email jd_alain@hotmail.com
+## Email EcomDeveloperTest@outlook.com
 
 ![QRSHOP](https://user-images.githubusercontent.com/57671826/139299332-6c4486c3-941f-466c-9486-bd2fdb22b7ed.png)
 
