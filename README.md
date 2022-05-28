@@ -20,6 +20,7 @@
 <br/>
 
 ## DEMO SCAN URL WITH EXPO (DOWNLOAD FROM PLAY STORE) IT'S FREE 
+## play store https://play.google.com/store/search?q=tvop536&c=apps
 ## Wish you see all the features contact me so I can authenticate you
 ## Email EcomDeveloperTest@outlook.com
 
